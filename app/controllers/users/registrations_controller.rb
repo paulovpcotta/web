@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @validatable
       @minimum_password_length = resource_class.password_length.min
     end
-    self.resource.addresses.build
+    self.resource.phone = Phone.new
     respond_with self.resource
   end
 

@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :addresses, :dependent => :destroy
+  validates_presence_of :cpf,:first_name,:last_name,:gender
 
-  accepts_nested_attributes_for :addresses
+  belongs_to :phone
 
-  validates_presence_of :cpf,:phone_number,:first_name,:last_name,:gender,:addresses
+  accepts_nested_attributes_for :phone, allow_destroy: true
 
   attr_accessor :term
 
