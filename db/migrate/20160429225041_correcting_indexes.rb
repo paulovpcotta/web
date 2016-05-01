@@ -1,10 +1,6 @@
 class CorrectingIndexes < ActiveRecord::Migration
   def change
 	add_foreign_key :addresses, :cities
-	remove_foreign_key :professional_city_coverages, :professionals
-	remove_foreign_key :professional_district_coverages, :professionals
-	add_foreign_key :professional_city_coverages, :professionals
-	add_foreign_key :professional_district_coverages, :professionals
 	add_foreign_key :professional_service, :professionals
 	add_foreign_key :professionals, :users
 	add_foreign_key :professionals, :phones	
