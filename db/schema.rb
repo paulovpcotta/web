@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429225041) do
+ActiveRecord::Schema.define(version: 20160501033553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20160429225041) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "professional_service", force: :cascade do |t|
+  create_table "professional_services", force: :cascade do |t|
     t.boolean  "active"
     t.decimal  "price"
     t.integer  "service_id"
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(version: 20160429225041) do
     t.integer  "professional_id"
   end
 
-  add_index "professional_service", ["service_id"], name: "index_professional_service_on_service_id", using: :btree
-  add_index "professional_service", ["service_unit_id"], name: "index_professional_service_on_service_unit_id", using: :btree
+  add_index "professional_services", ["service_id"], name: "index_professional_services_on_service_id", using: :btree
+  add_index "professional_services", ["service_unit_id"], name: "index_professional_services_on_service_unit_id", using: :btree
 
   create_table "professionals", force: :cascade do |t|
     t.integer  "user_id"
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20160429225041) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "phone_id",                            null: false
+    t.integer  "phone_id"
     t.string   "gender"
     t.date     "birthday"
     t.string   "cpf"
@@ -194,15 +194,26 @@ ActiveRecord::Schema.define(version: 20160429225041) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "addresses", "cities"
   add_foreign_key "cities", "states"
   add_foreign_key "districts", "cities"
   add_foreign_key "professional_city_coverages", "cities"
-  add_foreign_key "professional_city_coverages", "professional_service", column: "professional_id"
+  add_foreign_key "professional_city_coverages", "professional_services", column: "professional_id"
   add_foreign_key "professional_city_coverages", "professionals"
   add_foreign_key "professional_district_coverages", "districts"
-  add_foreign_key "professional_district_coverages", "professional_service", column: "professional_id"
+  add_foreign_key "professional_district_coverages", "professional_services", column: "professional_id"
   add_foreign_key "professional_district_coverages", "professionals"
-  add_foreign_key "professional_service", "service_units"
-  add_foreign_key "professional_service", "services"
+  add_foreign_key "professional_profession_images", "professional_professions"
+  add_foreign_key "professional_professions", "professionals"
+  add_foreign_key "professional_professions", "professions"
+  add_foreign_key "professional_services", "professionals"
+  add_foreign_key "professional_services", "service_units"
+  add_foreign_key "professional_services", "services"
+  add_foreign_key "professionals", "addresses"
+  add_foreign_key "professionals", "phones"
+  add_foreign_key "professionals", "users"
+  add_foreign_key "service_professional_feedbacks", "professional_services"
+  add_foreign_key "service_professional_feedbacks", "users"
   add_foreign_key "services", "categories"
+  add_foreign_key "users", "phones"
 end
