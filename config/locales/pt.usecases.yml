@@ -91,12 +91,14 @@ pt:
       button_change: 'Enviar'
       new_password: 'Nova Senha'
       confirm_password: 'Confirmar Senha'
-  service_ads:
+  professional_services:
     index:
-      category: 'Categorias'
-      location: Localização
+      allCategory: 'Todas as Categorias'
+      allLocation: 'Todas as Localizações'
+      services: 'Serviços'
+      location: 'Localização'
     new:
-      title: Faça aqui seu anúncio grátis
+      title: 'Faça aqui seu anúncio grátis'
       howtosell: 'Como se tornar um kabrabom?'
       howtosell_item1: 'Escreva um titulo claro e uma descrição detalhada do seu trabalho'
       howtosell_item2: 'Confira se o produto está classificado corretamente de acordo com a categoria e o tipo de serviço.'
