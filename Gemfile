@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -62,6 +62,6 @@ group :development do
 end
 
 group :production do
-
 end
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
