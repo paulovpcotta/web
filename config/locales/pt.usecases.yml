@@ -95,8 +95,16 @@ pt:
     index:
       allCategory: 'Todas as Categorias'
       allLocation: 'Todas as Localizações'
-      services: 'Serviços'
+      category: 'Categorias'
       location: 'Localização'
+      price_range: 'Faixa de Preço'
+      service_provider: 'Prestador de Serviço'
+      all_service: 'Todos'
+      company: 'Empresa'
+      particular: 'Particular'
+      order_by: 'Ordenar'
+      low_price: 'Menor Preço'
+      high_price: 'Maior Preço'
     new:
       title: 'Faça aqui seu anúncio grátis'
       howtosell: 'Como se tornar um kabrabom?'
@@ -120,7 +128,7 @@ pt:
       user:
         one: Usuário
         other: Usuários
-      service_ad:
+      professional_service:
         one: Anúncio
         other: Anúncios
     attributes:
@@ -162,7 +170,7 @@ pt:
       phone:
         ddd: Ddd
         phone: Telefone
-      service_ad:
+      professional_service:
         category_id: Categoria
         title: Título
         description: Descrição

@@ -1,4 +1,4 @@
-json.array!(@service_ads) do |service_ad|
-  json.extract! service_ad, :id, :title, :description, :active, :price, :service_id, :user_id
-  json.url service_ad_url(service_ad, format: :json)
+json.array!(@professional_services) do |professional_service|
+  json.extract! professional_service, :id, :title, :description, :active, :price, :service_id, :user_id
+  json.url professional_service_url(professional_service, format: :json)
 end

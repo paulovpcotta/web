@@ -38,7 +38,7 @@
                 <aside>
                     <div class="inner-box">
                         <div class="categories-list  list-filter">
-                            <h5 class="list-title"><strong><a href="#"><%= t('.services') %></a></strong></h5>
+                            <h5 class="list-title"><strong><a href="#"><%= t('.category') %></a></strong></h5>
                             <ul class=" list-unstyled">
                                 <% Category.find_each do |category| %>
                                 <li>
@@ -54,16 +54,16 @@
                                     <span class="count">&nbsp;<%= @categories.size %></span>
                                     <% end %>
                                     <ul class=" list-unstyled long-list">
-                                        <% Service.where({category_id: category.id}).find_each do |service| %>
+                                        <% ProfessionalService.where({category_id: category.id}).find_each do |professional_service| %>
                                         <li>
-                                            <%= link_to professional_services_path(:category => @category,:service =>
-                                            service.id), :post => true do %>
-                                            <% if service.id.to_s == @service %>
-                                            <strong><%= service.name %></strong>
+                                            <%= link_to professional_services_path(:category => @category,:professional_service =>
+                                            professional_service.id), :post => true do %>
+                                            <% if professional_service.id.to_s == @service %>
+                                            <strong><%= professional_service.name %></strong>
                                             <% else %>
-                                            <%= service.name %>
+                                            <%= professional_service.name %>
                                             <% end %>
-                                            <span class="count">(@services.size)</span>
+                                            <span class="count">(@professional_services.size)</span>
                                             <% end %>
                                         </li>
                                         <% end %>
@@ -103,7 +103,7 @@
                         <!--/.locations-list-->
 
                         <div class="locations-list  list-filter">
-                            <h5 class="list-title"><strong><a href="#">Price range</a></strong></h5>
+                            <h5 class="list-title"><strong><a href="#"><%= t('.price_range') %></a></strong></h5>
 
                             <form role="form" class="form-inline ">
                                 <div class="form-group col-sm-4 no-padding">
@@ -120,20 +120,20 @@
                             <div style="clear:both"></div>
                         </div><!--/.list-filter-->
                         <div class="locations-list  list-filter">
-                            <h5 class="list-title"><strong><a href="#">Seller</a></strong></h5>
+                            <h5 class="list-title"><strong><a href="#"><%= t('.service_provider') %></a></strong></h5>
                             <ul class="browse-list list-unstyled long-list">
-                                <li><a href="sub-category-sub-location.html"><strong>All Ads</strong>
+                                <li><a href="sub-category-sub-location.html"><strong><%= t('.all_service') %></strong>
                                     <span class="count">228,705</span></a>
                                 </li>
                                 <li>
-                                    <a href="sub-category-sub-location.html">Business <span class="count">28,705</span></a>
+                                    <a href="sub-category-sub-location.html"><%= t('.company') %> <span class="count">28,705</span></a>
                                 </li>
                                 <li>
-                                    <a href="sub-category-sub-location.html">Personal <span class="count">18,705</span></a>
+                                    <a href="sub-category-sub-location.html"><%= t('.particular') %> <span class="count">18,705</span></a>
                                 </li>
                             </ul>
                         </div><!--/.list-filter-->
-                        <div class="locations-list  list-filter">
+                        <!-- <div class="locations-list  list-filter">
                             <h5 class="list-title"><strong><a href="#">Condition</a></strong></h5>
                             <ul class="browse-list list-unstyled long-list">
                                 <li><a href="sub-category-sub-location.html">New <span class="count">228,705</span></a>
@@ -142,7 +142,7 @@
                                 </li>
                                 <li><a href="sub-category-sub-location.html">None </a></li>
                             </ul>
-                        </div><!--/.list-filter-->
+                        </div><!--/.list-filter--> -->
                         <div style="clear:both"></div>
                     </div>
 
@@ -158,16 +158,16 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs add-tabs" role="tablist">
                             <li class="active">
-                                <a href="#allAds" role="tab" data-toggle="tab">All Ads
-                                    <span class="badge">228,705</span></a>
+                                <a href="#allAds" role="tab" data-toggle="tab"><%= t('.all_service') %>
+                                    <span class="badge">@professional_services.size</span></a>
                             </li>
 
                         </ul>
                         <div class="tab-filter">
                             <select class="selectpicker" data-style="btn-select" data-width="auto">
-                                <option>Short by</option>
-                                <option>Price: Low to High</option>
-                                <option>Price: High to Low</option>
+                                <option><%= t('.order_by') %></option>
+                                <option><%= t('.low_price') %></option>
+                                <option><%= t('.high_price') %></option>
                             </select>
                         </div>
                     </div>
