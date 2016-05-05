@@ -27,6 +27,9 @@ class ProfessionalServicesController < ApplicationController
       @district = params[:district]
       @professional_services = ProfessionalService.where(my_hash).joins(:districts).where(my_join_hash).find_each
     end
+    @categories = Category.all
+    @locations = District.all
+    @professional_services = ProfessionalService.all
 
   end
 

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'servicesByCategory/retrieveByCategory' => "services#retrieveByCategory", :as => 'remote_select' 
 
+  get "list_professional_service" => "professional_services#index"
+
   # Example of regular route:
   #
 
