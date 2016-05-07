@@ -46,6 +46,8 @@ gem 'pg'
 
 gem 'devise'
 
+gem 'correios-cep', github: 'prodis/correios-cep'
+
 gem "paperclip", "~> 4.3"
 
 group :development, :test do

@@ -1,5 +1,55 @@
-<h1>New Professional</h1>
+<div class="main-container">
+  <div class="container">
+    <div class="row">
+      <%= bootstrap_flash %>
+      <div class="col-md-9 page-content">
+        <div class="inner-box category-content">
+          <h2 class="title-2 uppercase"><strong> <i class="icon-docs"></i> <%= t('.title')%></strong></h2>
+          <div class="row">
+            <div class="col-sm-12">
+              <%= render 'form' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.page-content -->
 
-<%= render 'form' %>
+      <div class="col-md-3 reg-sidebar">
+        <div class="reg-sidebar-inner text-center">
+          <div class="promo-text-box"><i class=" icon-picture fa fa-4x icon-color-1"></i>
+            <h3><strong><%= t '.free_classified_ad'%></strong></h3>
+            <p> Preencha os dados ao lado para publicar seu anuncio inteiramente grátis. Utilize as opções disponiveis pra melhor destacar seu anuncio </p>
+          </div>
 
-<%= link_to 'Back', professionals_path %>
+          <div class="panel sidebar-panel">
+            <div class="panel-heading uppercase">
+              <small><strong><%= t '.howtosell'%></strong></small>
+            </div>
+            <div class="panel-content">
+              <div class="panel-body text-left">
+                <ul class="list-check">
+                  <li> <%= t '.howtosell_item1'%></li>
+                  <li> <%= t '.howtosell_item2'%></li>
+                  <li> <%= t '.howtosell_item3'%></li>
+                  <li> <%= t '.howtosell_item4'%> </li>
+                  <li> <%= t '.howtosell_item5'%> </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div><!--/.reg-sidebar-->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</div>
+<script src="/js/fileinput.min.js" type="text/javascript"></script>
+<script>
+  // initialize with defaults
+  $(".fileuploadservice").fileinput({'showUpload':false, 'previewFileType':'any', browseLabel:'Procurar...',removeLabel:'Remover'});
+</script>
+<!-- /.main-container -->

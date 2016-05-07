@@ -1,57 +1,44 @@
-<%= form_for(@professional) do |f| %>
-  <% if @professional.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@professional.errors.count, "error") %> prohibited this professional from being saved:</h2>
+<%= bootstrap_form_for(@professional, layout: :horizontal, inline_errors: false, html: {multipart: true}) do |f| %>
+    <fieldset>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :active %>
+      <%= f.fields_for :address do |a| %>
+          <%= a.text_field :cep, data: {inputmask: "'mask': '99999-999'"}, label_col: "col-md-4", control_col: "col-md-4", append: link_to("Buscar", "#", class: "btn btn-default", id: "buscarCep", onclick: "return false;") %>
+          <script>
+            $("#buscarCep").click(function () {
+              $.ajax({
+                url: "/cep/search/" + $('#professional_address_attributes_cep').val() + ".json",
+                type: "GET",
+                dataType: 'json',
+                contentType: 'application/json',
+                data: {},
+                success: function (data) {
+                  console.log(data);
+                  $('#professional_address_attributes_main').val(data.main);
+                  $('#professional_address_attributes_city_attributes_name').val(data.city.name);
+                  $('#professional_address_attributes_district').val(data.district);
+                  $("#professional_address_attributes_city_attributes_state option[value=" + data.state + "]").prop("selected", "selected");
+                }
+              });
+            });
+          </script>
+          <%= a.text_field :main, label_col: "col-md-4", control_col: "col-md-6" %>
 
-      <ul>
-      <% @professional.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+
+          <%= a.text_field :num, label_col: "col-md-4", control_col: "col-md-2" %>
+          <%= a.text_field :complement, label_col: "col-md-4", control_col: "col-md-6" %>
+
+          <%= a.text_field :district, label_col: "col-md-4", control_col: "col-md-6" %>
+          <%= a.fields_for :city do |c| %>
+            <%= c.text_field :name, label_col: "col-md-4", control_col: "col-md-6" %>
+            <%= c.collection_select :state, State.all, :sign, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
+          <% end %>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :integer %><br>
-    <%= f.text_field :integer %>
-  </div>
-  <div class="field">
-    <%= f.label :nothing_on_record %><br>
-    <%= f.text_field :nothing_on_record %>
-  </div>
-  <div class="field">
-    <%= f.label :integer %><br>
-    <%= f.text_field :integer %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br>
-    <%= f.text_field :active %>
-  </div>
-  <div class="field">
-    <%= f.label :integer %><br>
-    <%= f.text_field :integer %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_id %><br>
-    <%= f.text_field :phone_id %>
-  </div>
-  <div class="field">
-    <%= f.label :integer %><br>
-    <%= f.text_field :integer %>
-  </div>
-  <div class="field">
-    <%= f.label :address_id %><br>
-    <%= f.text_field :address_id %>
-  </div>
-  <div class="field">
-    <%= f.label :integer %><br>
-    <%= f.text_field :integer %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8">
+          <%= f.submit 'Submit', class:"btn btn-success btn-lg" %>
+        </div>
+      </div>
+    </fieldset>
 <% end %>

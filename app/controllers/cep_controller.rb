@@ -1,24 +1,18 @@
 class CepController < ApplicationController
 
+  require 'correios-cep'
 
-
-  def findCepSite cep
-    HTTParty.post('http://www.buscacep.correios.com.br/servicos/dnec/consultaLogradouroAction.do',:query=>{:CEP =>cep,:Metodo =>'listaLogradouro',:TipoConsulta =>'cep' })
-  end
 
 
   def search
+
+    addressFound = Correios::CEP::AddressFinder.get(params[:id])
+
   	@address = Address.new
-  	result = findCepSite params[:id]
-  	page = Nokogiri::HTML(result.force_encoding("windows-1252"))
-    select =  page.css('table tr td').select{|td| td['style'] == "padding: 2px"}
-    if !select.empty?
-    @address.main =  select[0].text
-    @address.district =  select[1].text
-    @address.city =  select[2].text
-    @address.state = select[3].text
-    @address.cep  = select[4].text
-    end
+    @address.main =  addressFound[:address]
+    @address.district =  addressFound[:neighborhood]
+    @address.city =  City.find_by_name addressFound[:city]
+    @address.cep  = params[:id]
     respond_to do |format|
   		format.json { render json: @address }
 	  end

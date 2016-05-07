@@ -38,3 +38,4 @@ ServiceUnit.create([{name:'Metro quadrado'},
 categories = Category.create([{name:'Automoveis e Cia',description:'Automoveis e Cia',active:true,icon:'car'},
                  {name:'Residencial',description:'Residencial',active:true,icon:'home'},])
 Service.create({name:'Funilaria',description:'Automoveis e Cia',category:categories.first})
+City.create({name:'Brasília',active:true,state:State.find_by_sign 'DF'})

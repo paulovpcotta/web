@@ -15,6 +15,8 @@ class ProfessionalsController < ApplicationController
   # GET /professionals/new
   def new
     @professional = Professional.new
+    @professional.address = Address.new
+    @professional.address.city = City.new
   end
 
   # GET /professionals/1/edit

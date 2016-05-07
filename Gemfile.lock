@@ -5,6 +5,14 @@ GIT
     jquery-inputmask-rails (0.3.3)
       railties (>= 3.1, <= 5.0)
 
+GIT
+  remote: git://github.com/prodis/correios-cep.git
+  revision: 92f5988075f6a7ab84031358659e1a0cbf743845
+  specs:
+    correios-cep (0.6.1)
+      log-me (~> 0.0.10)
+      ox (~> 2.2.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -93,6 +101,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    log-me (0.0.10)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -108,6 +117,7 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
+    ox (2.2.4)
     paperclip (4.3.6)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -194,6 +204,7 @@ DEPENDENCIES
   bootstrap_form
   byebug
   coffee-rails (~> 4.1.0)
+  correios-cep!
   devise
   httparty
   jbuilder (~> 2.0)
