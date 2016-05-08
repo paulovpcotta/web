@@ -1,6 +1,9 @@
 
 
 class ProfessionalsController < ApplicationController
+
+  require 'correios-cep'
+
   before_action :set_professional, only: [:show, :edit, :update, :destroy]
 
   # GET /professionals
@@ -17,6 +20,7 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.new
     @professional.address = Address.new
     @professional.address.city = City.new
+    @city_list = {}
   end
 
   # GET /professionals/1/edit
@@ -26,11 +30,27 @@ class ProfessionalsController < ApplicationController
   # POST /professionals
   def create
     @professional = Professional.new(professional_params)
-
     if @professional.save
       redirect_to @professional, notice: t('helpers.messages.save' , model:t('activerecord.models.professional.one'))
     else
       render :new
+    end
+  end
+
+  def search
+
+    addressFound = Correios::CEP::AddressFinder.get(params[:id])
+
+    @address = Address.new
+    @address.main =  addressFound[:address]
+    @address.district =  addressFound[:neighborhood]
+    @address.city =  City.find_by_name addressFound[:city]
+    @address.cep  = params[:id]
+    @city_list = City.find_by_state_id @address.city.state_id
+    @professional = Professional.new
+    @professional.address = @address
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -57,9 +77,8 @@ class ProfessionalsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def professional_params
-
-      params.require(:professional).permit(:user_id, :integer, :nothing_on_record, :integer, :active, :integer, :phone_id, :integer, :address_id, :integer)
-
+      params.require(:professional).permit!
     end
+
 end
 

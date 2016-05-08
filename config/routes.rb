@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'message/index'
 
   devise_for :users, controllers: { sessions: "users/sessions",confirmations: "users/confirmations", registrations: "users/registrations", passwords: "users/passwords"}
-  get 'cep/search/:id' =>  'cep#search'
+  get 'cep/search/:id' =>  'cep#search', as: 'cep_search'
+  get 'professionals/cep/:id' =>  'professionals#search', as: 'professionals_search'
 
   resources :professions
 

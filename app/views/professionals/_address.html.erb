@@ -1,0 +1,29 @@
+
+<div id="form_address">
+<%= f.fields_for :address do |a| %>
+        <%= a.text_field :cep, data: {inputmask: "'mask': '99999-999'"}, class:"form-control" , label_col: "col-md-4", control_col: "col-md-4" , append: link_to("Buscar", "#", class: "btn btn-default", id: "buscarCep", onclick: "return false;") %>
+
+        <script>
+          $("#buscarCep").click(function () {
+            $.ajax({
+              url: "/professionals/cep/" + $('#professional_address_attributes_cep').val(),
+              type: "GET"
+            });
+          });
+        </script>
+
+
+    <%= a.text_field :main, label_col: "col-md-4", control_col: "col-md-6" %>
+
+
+    <%= a.text_field :num, label_col: "col-md-4", control_col: "col-md-2" %>
+    <%= a.text_field :complement, label_col: "col-md-4", control_col: "col-md-6" %>
+    <%= a.text_field :district, label_col: "col-md-4", control_col: "col-md-6" %>
+    <%= a.fields_for :city do |c| %>
+            <% if address.city.state.present? %>
+              <%= a.collection_select :city_id, City.where(:state_id => address.city.state.id), :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
+            <%end%>
+        <%= c.collection_select :state_id, State.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
+    <% end %>
+<% end %>
+</div>

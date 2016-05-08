@@ -1,39 +1,8 @@
-<%= bootstrap_form_for(@professional, layout: :horizontal, inline_errors: false, html: {multipart: true}) do |f| %>
+<%= bootstrap_form_for(@professional, layout: :horizontal,inline_errors: false, html: {multipart: true}) do |f| %>
     <fieldset>
       <%= f.hidden_field :user_id %>
       <%= f.hidden_field :active %>
-      <%= f.fields_for :address do |a| %>
-          <%= a.text_field :cep, data: {inputmask: "'mask': '99999-999'"}, label_col: "col-md-4", control_col: "col-md-4", append: link_to("Buscar", "#", class: "btn btn-default", id: "buscarCep", onclick: "return false;") %>
-          <script>
-            $("#buscarCep").click(function () {
-              $.ajax({
-                url: "/cep/search/" + $('#professional_address_attributes_cep').val() + ".json",
-                type: "GET",
-                dataType: 'json',
-                contentType: 'application/json',
-                data: {},
-                success: function (data) {
-                  console.log(data);
-                  $('#professional_address_attributes_main').val(data.main);
-                  $('#professional_address_attributes_city_attributes_name').val(data.city.name);
-                  $('#professional_address_attributes_district').val(data.district);
-                  $("#professional_address_attributes_city_attributes_state option[value=" + data.state + "]").prop("selected", "selected");
-                }
-              });
-            });
-          </script>
-          <%= a.text_field :main, label_col: "col-md-4", control_col: "col-md-6" %>
-
-
-          <%= a.text_field :num, label_col: "col-md-4", control_col: "col-md-2" %>
-          <%= a.text_field :complement, label_col: "col-md-4", control_col: "col-md-6" %>
-
-          <%= a.text_field :district, label_col: "col-md-4", control_col: "col-md-6" %>
-          <%= a.fields_for :city do |c| %>
-            <%= c.text_field :name, label_col: "col-md-4", control_col: "col-md-6" %>
-            <%= c.collection_select :state, State.all, :sign, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
-          <% end %>
-      <% end %>
+      <%= render partial: 'address', locals: {address: @professional.address,f:f} %>
       <div class="form-group">
         <label class="col-md-3 control-label"></label>
         <div class="col-md-8">
