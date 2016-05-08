@@ -1,0 +1,274 @@
+<p id="notice"><%= notice %></p>
+<%= form_tag(professional_services_path) do %>
+<%= hidden_field_tag "category", @category %>
+<div class="search-row-wrapper">
+    <div class="container text-center">
+        <div class="col-sm-3">
+            <input class="form-control keyword" type="text" placeholder="e.g. Mobile Sale">
+        </div>
+        <div class="col-sm-3">
+            <select class="form-control" name="category" id="search-category">
+                <option selected="selected" value=""><%= t('.allCategory')%></option>
+                <option value="" style="background-color:#E9E9E9;font-weight:bold;" disabled="disabled"> - Vehicles
+                    <% @categories.each do |category| %>
+                <option><%=category.name%></option>
+                <% end %>
+                <option value="Other"> Other</option>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <select class="form-control" name="location" id="id-location">
+                <option selected="selected" value=""><%= t('.allLocation')%></option>
+                <% @locations.each do |location| %>
+                <option><%=location.name%></option>
+                <% end %>
+                <option value="Other-Locations">Other Locations</option>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-block btn-primary  "><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+</div>
+<!-- /.search-row -->
+<div class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 page-sidebar">
+                <aside>
+                    <div class="inner-box">
+                        <div class="categories-list  list-filter">
+                            <h5 class="list-title"><strong><a href="#"><%= t('.category') %></a></strong></h5>
+                            <ul class=" list-unstyled">
+                                <% Category.find_each do |category| %>
+                                <li>
+                                    <% if category.id.to_s == @category %>
+                                    <%= link_to professional_service_path(:category => category.id), :post => true do %>
+                                <span class="title">
+                                   <% if @service.nil? %>
+                                        <strong><%= category.name %></strong>
+                                      <% else %>
+                                        <%= category.name %>
+                                       <% end %>
+                                      </span>
+                                    <span class="count">&nbsp;<%= @categories.size %></span>
+                                    <% end %>
+                                    <ul class=" list-unstyled long-list">
+                                        <% ProfessionalService.where({category_id: category.id}).find_each do |professional_service| %>
+                                        <li>
+                                            <%= link_to professional_services_path(:category => @category,:professional_service =>
+                                            professional_service.id), :post => true do %>
+                                            <% if professional_service.id.to_s == @service %>
+                                            <strong><%= professional_service.name %></strong>
+                                            <% else %>
+                                            <%= professional_service.name %>
+                                            <% end %>
+                                            <span class="count">(@professional_services.size)</span>
+                                            <% end %>
+                                        </li>
+                                        <% end %>
+                                    </ul>
+                                    <% else %>
+                                    <%= link_to professional_services_path(:category => category.id), :post => true do
+                                    %>
+                                      <span class="title">
+                                          <%= category.name %>
+                                      </span>
+                                    <span class="count">&nbsp;8626</span>
+                                    <% end %>
+                                    <% end %>
+                                </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                        <!--/.categories-list-->
+
+                        <div class="locations-list  list-filter">
+                            <h5 class="list-title"><strong><a href="#"><%= t('.location') %></a></strong></h5>
+                            <ul class="browse-list list-unstyled long-list">
+                                <% District.find_each do |district| %>
+                                <li>
+                                    <%= link_to professional_services_path(:category => @category,:service =>
+                                    @service,:district => district.id), :post => true do %>
+                                    <% if district.id.to_s == @district %>
+                                    <strong><%= district.name %></strong>
+                                    <% else %>
+                                    <%= district.name %>
+                                    <% end %>
+                                    <% end %>
+                                </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                        <!--/.locations-list-->
+
+                        <div class="locations-list  list-filter">
+                            <h5 class="list-title"><strong><a href="#"><%= t('.price_range') %></a></strong></h5>
+
+                            <form role="form" class="form-inline ">
+                                <div class="form-group col-sm-4 no-padding">
+                                    <input type="text" placeholder="$ 2000 " id="minPrice" class="form-control">
+                                </div>
+                                <div class="form-group col-sm-1 no-padding text-center"> -</div>
+                                <div class="form-group col-sm-4 no-padding">
+                                    <input type="text" placeholder="$ 3000 " id="maxPrice" class="form-control">
+                                </div>
+                                <div class="form-group col-sm-3 no-padding">
+                                    <button class="btn btn-default pull-right" type="submit">GO</button>
+                                </div>
+                            </form>
+                            <div style="clear:both"></div>
+                        </div><!--/.list-filter-->
+                        <div class="locations-list  list-filter">
+                            <h5 class="list-title"><strong><a href="#"><%= t('.service_provider') %></a></strong></h5>
+                            <ul class="browse-list list-unstyled long-list">
+                                <li><a href="sub-category-sub-location.html"><strong><%= t('.all_service') %></strong>
+                                    <span class="count">228,705</span></a>
+                                </li>
+                                <li>
+                                    <a href="sub-category-sub-location.html"><%= t('.company') %> <span class="count">28,705</span></a>
+                                </li>
+                                <li>
+                                    <a href="sub-category-sub-location.html"><%= t('.particular') %> <span class="count">18,705</span></a>
+                                </li>
+                            </ul>
+                        </div><!--/.list-filter-->
+                        <!-- <div class="locations-list  list-filter">
+                            <h5 class="list-title"><strong><a href="#">Condition</a></strong></h5>
+                            <ul class="browse-list list-unstyled long-list">
+                                <li><a href="sub-category-sub-location.html">New <span class="count">228,705</span></a>
+                                </li>
+                                <li><a href="sub-category-sub-location.html">Used <span class="count">28,705</span></a>
+                                </li>
+                                <li><a href="sub-category-sub-location.html">None </a></li>
+                            </ul>
+                        </div><!--/.list-filter-->
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <!--/.categories-list-->
+                </aside>
+            </div>
+            <!--/.page-side-bar-->
+            <div class="col-sm-9 page-content col-thin-left">
+
+                <div class="category-list">
+                    <div class="tab-box ">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs add-tabs" role="tablist">
+                            <li class="active">
+                                <a href="#allAds" role="tab" data-toggle="tab"><%= t('.all_service') %>
+                                    <span class="badge"><%= @professional_services.size %></span></a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-filter">
+                            <select class="selectpicker" data-style="btn-select" data-width="auto">
+                                <option><%= t('.order_by') %></option>
+                                <option><%= t('.low_price') %></option>
+                                <option><%= t('.high_price') %></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--/.tab-box-->
+
+                    <div class="listing-filter">
+                        <div class="pull-left col-xs-6">
+                            <div class="breadcrumb-list"><a href="#" class="current"> <span>All ads</span></a> in
+                                New York
+                                <a href="#selectRegion" id="dropdownMenu1" data-toggle="modal">
+                                    <span class="caret"></span> </a>
+                            </div>
+                        </div>
+                        <div class="pull-right col-xs-6 text-right listing-view-action">
+                            <span class="list-view active"><i class="  icon-th"></i></span>
+                            <span class="grid-view "><i class=" icon-th-large "></i></span></div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <!--/.listing-filter-->
+                    <div class="adds-wrapper">
+                        <% @professional_services.each do |professional_service| %>
+                        <div class="item-list">
+                            <div class="col-sm-2 no-padding photobox">
+                                <div class="add-image">
+                                    <span class="photo-count"><i class="fa fa-camera"></i> <%= professional_service.service_images.count %></span>
+                                    <%= link_to professional_service do %>
+                                    <% if (!professional_service.service_images.nil? &&
+                                    professional_service.service_images.any?) %>
+                                    <%= image_tag professional_service.service_images[0].photo.url, class: 'thumbnail
+                                    no-margin' %>
+                                    <% end %>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <!--/.photobox-->
+                            <div class="col-sm-7 add-desc-box">
+                                <div class="add-details">
+                                    <h5 class="add-title"> <%= link_to professional_service.title, professional_service
+                                        %> </h5>
+                  <span class="info-row">
+                    <span class="add-type business-ads tooltipHere" data-toggle="tooltip" data-placement="right"
+                          title="Profissional Autônomo"><i class="fa icon-user-2"></i> </span>
+                    <span class="date"><i class=" icon-person"> </i> <%= User.find(professional_service.user_id).first_name %> <%= User.find(professional_service.user_id).last_name %> </span>
+                    - <span class="item-location"><i class="fa fa-map-marker"></i> New York </span>
+                  </span>
+                  <span class="info-row">
+                    <i class=" icon-star" style="color:gold"> </i>
+                    <i class=" icon-star" style="color:gold"> </i>
+                    <i class=" icon-star" style="color:gold"> </i>
+                    <i class=" icon-star-empty"> </i>
+                  </span>
+                                </div>
+                            </div>
+                            <!--/.add-desc-box-->
+                            <div class="col-sm-3 text-right  price-box">
+                                A partir de
+                                <h2 class="item-price"><%= number_to_currency(professional_service.price, unit: "R$",
+                                    separator: ",", delimiter: ".") %> </h2>
+                                <a class="btn btn-danger  btn-sm make-favorite">
+                                    <i class="fa fa-certificate"></i>
+                                    <span>Urgent</span> </a>
+                                <a class="btn btn-default  btn-sm make-favorite"> <i class="fa fa-heart"></i>
+                                    <span>Save</span>
+                                </a>
+                            </div>
+                            <!--/.add-desc-box-->
+                        </div>
+                        <% end %>
+                        <!--/.item-list-->
+
+
+                    </div> <!--/.adds-wrapper-->
+
+                    <div class="tab-box  save-search-bar text-center">
+                        <a href=""> <i class=" icon-star-empty"></i> Save Search </a></div>
+                </div>
+                <div class="pagination-bar text-center">
+                    <ul class="pagination">
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#"> ...</a></li>
+                        <li><a class="pagination-btn" href="#">Next &raquo;</a></li>
+                    </ul>
+                </div>
+                <!--/.pagination-bar -->
+
+                <div class="post-promo text-center">
+                    <h2> Do you get anything for sell ? </h2>
+                    <h5>Sell your products online FOR FREE. It's easier than you think !</h5>
+                    <a href="post-ads.html" class="btn btn-lg btn-border btn-post btn-danger">Post a Free
+                        Ad </a></div>
+                <!--/.post-promo-->
+
+            </div>
+            <!--/.page-content-->
+
+        </div>
+    </div>
+</div>
+<% end %>
+<!-- /.main-container -->

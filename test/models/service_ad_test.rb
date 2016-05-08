@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ServiceAdTest < ActiveSupport::TestCase
+class ProfessionalServiceTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

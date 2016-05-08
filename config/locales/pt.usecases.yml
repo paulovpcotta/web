@@ -91,12 +91,22 @@ pt:
       button_change: 'Enviar'
       new_password: 'Nova Senha'
       confirm_password: 'Confirmar Senha'
-  service_ads:
+  professional_services:
     index:
+      allCategory: 'Todas as Categorias'
+      allLocation: 'Todas as Localizações'
       category: 'Categorias'
-      location: Localização
+      location: 'Localização'
+      price_range: 'Faixa de Preço'
+      service_provider: 'Prestador de Serviço'
+      all_service: 'Todos'
+      company: 'Empresa'
+      particular: 'Particular'
+      order_by: 'Ordenar'
+      low_price: 'Menor Preço'
+      high_price: 'Maior Preço'
     new:
-      title: Faça aqui seu anúncio grátis
+      title: 'Faça aqui seu anúncio grátis'
       howtosell: 'Como se tornar um kabrabom?'
       howtosell_item1: 'Escreva um titulo claro e uma descrição detalhada do seu trabalho'
       howtosell_item2: 'Confira se o produto está classificado corretamente de acordo com a categoria e o tipo de serviço.'
@@ -118,7 +128,7 @@ pt:
       user:
         one: Usuário
         other: Usuários
-      service_ad:
+      professional_service:
         one: Anúncio
         other: Anúncios
     attributes:
@@ -160,7 +170,7 @@ pt:
       phone:
         ddd: Ddd
         phone: Telefone
-      service_ad:
+      professional_service:
         category_id: Categoria
         title: Título
         description: Descrição

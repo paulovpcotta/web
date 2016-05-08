@@ -1,2 +1,0 @@
-module ServiceAdsHelper
-end

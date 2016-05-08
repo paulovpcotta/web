@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class ServiceAdsControllerTest < ActionController::TestCase
+class ProfessionalServicesControllerTest < ActionController::TestCase
   setup do
-    @service_ad = service_ads(:one)
+    @professional_service = professional_services(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:service_ads)
+    assert_not_nil assigns(:professional_services)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class ServiceAdsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create service_ad" do
-    assert_difference('ServiceAd.count') do
-      post :create, service_ad: { active: @service_ad.active, description: @service_ad.description, price: @service_ad.price, service_id: @service_ad.service_id, title: @service_ad.title, user_id: @service_ad.user_id }
+  test "should create professional_service" do
+    assert_difference('ProfessionalService.count') do
+      post :create, professional_service: { active: @professional_service.active, description: @professional_service.description, price: @professional_service.price, service_id: @professional_service.service_id, title: @professional_service.title, user_id: @professional_service.user_id }
     end
 
-    assert_redirected_to service_ad_path(assigns(:service_ad))
+    assert_redirected_to professional_service_path(assigns(:professional_service))
   end
 
-  test "should show service_ad" do
-    get :show, id: @service_ad
+  test "should show professional_service" do
+    get :show, id: @professional_service
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @service_ad
+    get :edit, id: @professional_service
     assert_response :success
   end
 
-  test "should update service_ad" do
-    patch :update, id: @service_ad, service_ad: { active: @service_ad.active, description: @service_ad.description, price: @service_ad.price, service_id: @service_ad.service_id, title: @service_ad.title, user_id: @service_ad.user_id }
-    assert_redirected_to service_ad_path(assigns(:service_ad))
+  test "should update professional_service" do
+    patch :update, id: @professional_service, professional_service: { active: @professional_service.active, description: @professional_service.description, price: @professional_service.price, service_id: @professional_service.service_id, title: @professional_service.title, user_id: @professional_service.user_id }
+    assert_redirected_to professional_service_path(assigns(:professional_service))
   end
 
-  test "should destroy service_ad" do
-    assert_difference('ServiceAd.count', -1) do
-      delete :destroy, id: @service_ad
+  test "should destroy professional_service" do
+    assert_difference('ProfessionalService.count', -1) do
+      delete :destroy, id: @professional_service
     end
 
-    assert_redirected_to service_ads_path
+    assert_redirected_to professional_services_path
   end
 end

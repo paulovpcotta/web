@@ -1,5 +1,5 @@
 class ServiceImage < ActiveRecord::Base
-  belongs_to :service_ad
+  belongs_to :professional_service
 
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }
 

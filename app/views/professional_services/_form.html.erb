@@ -1,15 +1,15 @@
-<%= bootstrap_form_for(@service_ad, layout: :horizontal, inline_errors: false, html: {multipart: true}) do |f| %>
+<%= bootstrap_form_for(@professional_service, layout: :horizontal, inline_errors: false, html: {multipart: true}) do |f| %>
     <fieldset>
       <%= f.hidden_field :user_id %>
       <%= f.hidden_field :active %>
       <script>
         $(document).ready(function() {
-          $('#service_ad_category_id').change(function() {
+          $('#professional_service_category_id').change(function() {
             $.ajax({
               url: "<%= remote_select_url %>", // this will be routed
               type: 'GET',
               data: {
-                send_id: $("#service_ad_category_id").val()
+                send_id: $("#professional_service_category_id").val()
               },
               async: true,
               dataType: "json",
@@ -18,19 +18,19 @@
               },
               success: function(data){
                 if(data == null){
-                  $("#service_ad_service_id").empty().append(new Option('Selecione', ''));
+                  $("#professional_service_service_id").empty().append(new Option('Selecione', ''));
                 }else if(data.length){
                   // here we iterate the json result
                   for(var i in data)
                   {
                     var id = data[i].id;
                     var title = data[i].name;
-                    $("#service_ad_service_id").append(new Option(title, id));
+                    $("#professional_service_service_id").append(new Option(title, id));
                   }
                 }else{
                   var id = data.id;
                   var title = data.name;
-                  $("#service_ad_service_id").append(new Option(title, id));
+                  $("#professional_service_service_id").append(new Option(title, id));
                 }
 
               }
@@ -67,7 +67,7 @@
       </div>
       <div class="content-subheading">
         <i class="icon-location fa"></i>
-        <strong><%= t 'service_ads.new.comprehensiveness' %></strong>
+        <strong><%= t 'professional_services.new.comprehensiveness' %></strong>
       </div>
       <%= f.collection_select :state_id, State.where({active: true}), :id, :name, {control_col: "col-md-6", label_col: "col-md-4"} %>
       <%= f.collection_select :city_ids, City.where({active: true}), :id, :name, {control_col: "col-md-6", label_col: "col-md-4"} %>
