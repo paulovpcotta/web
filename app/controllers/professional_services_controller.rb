@@ -9,26 +9,28 @@ class ProfessionalServicesController < ApplicationController
     if params.key?(:service)
       my_hash['service_id'] = params[:service]
     end
-    if params.key?(:category)
-      my_hash['category_id'] = params[:category]
+    if params.key?(:category_id)
+      @category_id = params[:category_id]
+      my_hash['category_id'] = params[:category_id]
     end
-    if params.key?(:district)
+    if params.key?(:district_id)
+      @district_id = params[:district_id]
       my_join_hash['districts'] = {id: params[:district]}
     end
+
     if my_hash.empty?
       @professional_services = ProfessionalService.all
     elsif my_join_hash.empty?
       @service = params[:service]
-      @category = params[:category]
+      @category_id = params[:category_id]
       @professional_services = ProfessionalService.where(my_hash).find_each
     else
       @service = params[:service]
-      @category = params[:category]
-      @district = params[:district]
+      @district_id = params[:district_id]
       @professional_services = ProfessionalService.where(my_hash).joins(:districts).where(my_join_hash).find_each
     end
-    @categories = Category.all
-    @locations = District.all
+    @all_categories = Category.order :name
+    @all_locations = District.order :name
     @professional_services = ProfessionalService.all
 
   end
@@ -98,4 +100,5 @@ class ProfessionalServicesController < ApplicationController
   def professional_service_params
     params.require(:professional_service).permit!
   end
+  
 end

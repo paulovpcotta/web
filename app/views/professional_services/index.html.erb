@@ -10,7 +10,7 @@
             <select class="form-control" name="category" id="search-category">
                 <option selected="selected" value=""><%= t('.allCategory')%></option>
                 <option value="" style="background-color:#E9E9E9;font-weight:bold;" disabled="disabled"> - Vehicles
-                    <% @categories.each do |category| %>
+                    <% @all_categories.each do |category| %>
                 <option><%=category.name%></option>
                 <% end %>
                 <option value="Other"> Other</option>
@@ -19,7 +19,7 @@
         <div class="col-sm-3">
             <select class="form-control" name="location" id="id-location">
                 <option selected="selected" value=""><%= t('.allLocation')%></option>
-                <% @locations.each do |location| %>
+                <% @all_locations.each do |location| %>
                 <option><%=location.name%></option>
                 <% end %>
                 <option value="Other-Locations">Other Locations</option>
@@ -41,43 +41,7 @@
                             <h5 class="list-title"><strong><a href="#"><%= t('.category') %></a></strong></h5>
                             <ul class=" list-unstyled">
                                 <% Category.find_each do |category| %>
-                                <li>
-                                    <% if category.id.to_s == @category %>
-                                    <%= link_to professional_service_path(:category => category.id), :post => true do %>
-                                <span class="title">
-                                   <% if @service.nil? %>
-                                        <strong><%= category.name %></strong>
-                                      <% else %>
-                                        <%= category.name %>
-                                       <% end %>
-                                      </span>
-                                    <span class="count">&nbsp;<%= @categories.size %></span>
-                                    <% end %>
-                                    <ul class=" list-unstyled long-list">
-                                        <% ProfessionalService.where({category_id: category.id}).find_each do |professional_service| %>
-                                        <li>
-                                            <%= link_to professional_services_path(:category => @category,:professional_service =>
-                                            professional_service.id), :post => true do %>
-                                            <% if professional_service.id.to_s == @service %>
-                                            <strong><%= professional_service.name %></strong>
-                                            <% else %>
-                                            <%= professional_service.name %>
-                                            <% end %>
-                                            <span class="count">(@professional_services.size)</span>
-                                            <% end %>
-                                        </li>
-                                        <% end %>
-                                    </ul>
-                                    <% else %>
-                                    <%= link_to professional_services_path(:category => category.id), :post => true do
-                                    %>
-                                      <span class="title">
-                                          <%= category.name %>
-                                      </span>
-                                    <span class="count">&nbsp;8626</span>
-                                    <% end %>
-                                    <% end %>
-                                </li>
+                                    <%= display_categories_left_side(category) %>
                                 <% end %>
                             </ul>
                         </div>
@@ -88,10 +52,9 @@
                             <ul class="browse-list list-unstyled long-list">
                                 <% District.find_each do |district| %>
                                 <li>
-                                    <%= link_to professional_services_path(:category => @category,:service =>
-                                    @service,:district => district.id), :post => true do %>
-                                    <% if district.id.to_s == @district %>
-                                    <strong><%= district.name %></strong>
+                                    <%= link_to professional_services_path(:district_id => district.id), :post => true do %>
+                                    <% if district.id.to_s == @district_id %>
+                                        <strong><%= district.name %></strong>
                                     <% else %>
                                     <%= district.name %>
                                     <% end %>
