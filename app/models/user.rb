@@ -4,9 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :cpf,:first_name,:last_name,:gender
+  has_one :phone
 
-  belongs_to :phone
+  has_many :service_professional_feedbacks
+  has_many :professionals
+  has_many :professional_professions, through: :professionals
+
+  validates_presence_of :cpf,:first_name,:last_name,:gender  
 
   accepts_nested_attributes_for :phone, allow_destroy: true
 

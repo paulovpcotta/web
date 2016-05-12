@@ -4,34 +4,25 @@ class ProfessionalServicesController < ApplicationController
 
   # GET /professional_services
   def index
-    my_hash = {}
-    my_join_hash = {}
-    if params.key?(:service)
-      my_hash['service_id'] = params[:service]
-    end
-    if params.key?(:category_id)
-      @category_id = params[:category_id]
-      my_hash['category_id'] = params[:category_id]
-    end
-    if params.key?(:district_id)
-      @district_id = params[:district_id]
-      my_join_hash['districts'] = {id: params[:district]}
-    end
-
-    if my_hash.empty?
-      @professional_services = ProfessionalService.all
-    elsif my_join_hash.empty?
-      @service = params[:service]
-      @category_id = params[:category_id]
-      @professional_services = ProfessionalService.where(my_hash).find_each
-    else
-      @service = params[:service]
-      @district_id = params[:district_id]
-      @professional_services = ProfessionalService.where(my_hash).joins(:districts).where(my_join_hash).find_each
-    end
-    @all_categories = Category.order :name
-    @all_locations = District.order :name
-    @professional_services = ProfessionalService.all
+  @district_id = params[:district_id] unless params.key?(:district_id)
+  @category_id = params[:category_id] unless params.key?(:category_id)
+    
+  
+  conditions = [:district_id, :category_id].inject({}) do |hsh, field|
+    if field.blank?
+      if(field == :district_id and @district_id != nil)
+        hsh[field] = @district_id
+      elsif(field == :category_id and @category_id != nil)
+        hsh[field] = @category_id
+      else
+        hsh[field] = params[field]      
+      end 
+    end     
+  end    
+  
+  @professional_services = ProfessionalService.where(conditions).active.find_each    
+  @all_categories = Category.order :name
+  @all_locations = District.order :name
 
   end
 

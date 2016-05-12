@@ -1,21 +1,18 @@
 class ProfessionalService < ActiveRecord::Base
-  belongs_to :service
+  belongs_to :professional   
+
   has_one :service_unit
-  has_one :state
-  has_one :category
+  has_one :service
 
-  has_many :service_images, :dependent => :destroy
-  has_many :city_coverages, :dependent => :destroy, inverse_of: :professional_service
-  has_many :cities, through: :city_coverages
-  has_many :district_coverages, :dependent => :destroy, inverse_of: :professional_service
-  has_many :districts, through: :district_coverages
+  has_one :user, through: :professional, source: :professional_professions
+  has_many :professional_profession, through: :professional, source: :professional_professions
 
-  accepts_nested_attributes_for :service_images
-  accepts_nested_attributes_for :city_coverages
-  accepts_nested_attributes_for :district_coverages
+  has_many :service_professional_feedbacks
 
+  accepts_nested_attributes_for :service_professional_feedbacks
 
+  validates_presence_of :active,:price, :service_id, :service_unit_id,:professional_id, :created_at, :updated_at
 
-  validates_presence_of :service,:title,:description,:price,:user_id,:service_id,:service_unit_id,:state_id,:category_id
+  scope :active, -> {where ("excluded_at IS NULL and active = TRUE")}
 
 end
