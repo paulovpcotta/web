@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501033553) do
+ActiveRecord::Schema.define(version: 20160511220240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20160501033553) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.text     "photo_content"
   end
 
   add_index "professional_profession_images", ["professional_profession_id"], name: "idx_serv_img_on_serv_ad_id", using: :btree
@@ -198,10 +199,8 @@ ActiveRecord::Schema.define(version: 20160501033553) do
   add_foreign_key "cities", "states"
   add_foreign_key "districts", "cities"
   add_foreign_key "professional_city_coverages", "cities"
-  add_foreign_key "professional_city_coverages", "professional_services", column: "professional_id"
   add_foreign_key "professional_city_coverages", "professionals"
   add_foreign_key "professional_district_coverages", "districts"
-  add_foreign_key "professional_district_coverages", "professional_services", column: "professional_id"
   add_foreign_key "professional_district_coverages", "professionals"
   add_foreign_key "professional_profession_images", "professional_professions"
   add_foreign_key "professional_professions", "professionals"

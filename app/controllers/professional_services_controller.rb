@@ -4,34 +4,54 @@ class ProfessionalServicesController < ApplicationController
 
   # GET /professional_services
   def index
-    my_hash = {}
-    my_join_hash = {}
-    if params.key?(:service)
-      my_hash['service_id'] = params[:service]
+    joins = {}    
+     
+    @city_name = ""
+    joins_location = []
+    join_cities = {}
+    join_cities['professional_city_coverages'] = 'city'
+    joins_location << join_cities
+    joins['professional'] = join_cities
+    
+    @service_name = ""   
+    if(params.key?(:city_name))
+      @city_name = params[:city_name]      
     end
-    if params.key?(:category_id)
-      @category_id = params[:category_id]
-      my_hash['category_id'] = params[:category_id]
+    
+    if(params.key?(:service_name))
+      @service_name = params[:service_name]      
     end
-    if params.key?(:district_id)
+    
+    clause_search_bar = get_clause_search_bar        
+    
+    if(params.key?(:district_id))
       @district_id = params[:district_id]
-      my_join_hash['districts'] = {id: params[:district]}
+      join_districts = {}
+      join_districts['professional_district_coverages'] = 'district'
+      joins_location << join_districts      
     end
-
-    if my_hash.empty?
-      @professional_services = ProfessionalService.all
-    elsif my_join_hash.empty?
-      @service = params[:service]
-      @category_id = params[:category_id]
-      @professional_services = ProfessionalService.where(my_hash).find_each
-    else
-      @service = params[:service]
-      @district_id = params[:district_id]
-      @professional_services = ProfessionalService.where(my_hash).joins(:districts).where(my_join_hash).find_each
-    end
-    @all_categories = Category.order :name
-    @all_locations = District.order :name
-    @professional_services = ProfessionalService.all
+          
+    if(params.key?(:category_id))
+      joins['service'] = 'category'
+      @category_id = params[:category_id]    
+    end    
+  
+  conditions = ['districts', 'categories'].inject({}) do |hash, field|
+    if !field.blank?
+      if(field == 'districts' and @district_id != nil)
+        hash[field] = {id: @district_id}        
+      elsif(field == 'categories' and @category_id != nil)
+        hash[field] = {id: @category_id}        
+      end
+      hash 
+    end     
+  end   
+  
+  joins['professional'] = joins_location
+  @professional_services = ProfessionalService.joins(joins, :service).where(conditions)
+  .where(clause_search_bar).active.find_each
+  @all_categories = Category.order :name
+  @all_locations = District.order :name
 
   end
 
@@ -99,6 +119,17 @@ class ProfessionalServicesController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def professional_service_params
     params.require(:professional_service).permit!
+  end
+  
+  def get_clause_search_bar
+      clause_search_bar = "cities.name like \'"+@city_name+"%\'" 
+      if(!@city_name.nil? and !@service_name.nil?)
+        clause_search_bar += " and"
+      else
+        clause_search_bar +=" or"
+      end
+      clause_search_bar += " services.name like \'"+@service_name+"%\'"
+      clause_search_bar
   end
   
 end
