@@ -4,9 +4,13 @@ class ProfessionalServicesController < ApplicationController
 
   # GET /professional_services
   def index
-  @district_id = params[:district_id] unless params.key?(:district_id)
-  @category_id = params[:category_id] unless params.key?(:category_id)
-    
+    if(params.key?(:district_id))
+      @district_id = params[:district_id]
+    end
+
+    if(params.key?(:category_id))
+      @category_id = params[:category_id]
+    end    
   
   conditions = [:district_id, :category_id].inject({}) do |hsh, field|
     if field.blank?

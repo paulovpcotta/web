@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   get "list_professional_service" => "professional_services#index"
 
+  get "professional_service/show_image_professional" => "professional_service#show_image_professional"
+
   # Example of regular route:
   #
 

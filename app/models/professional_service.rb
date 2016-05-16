@@ -15,4 +15,11 @@ class ProfessionalService < ActiveRecord::Base
 
   scope :active, -> {where ("excluded_at IS NULL and active = TRUE")}
 
+  public
+
+  def show_image_professional
+    @image = ProfessionalProfessionImage.find(params[:id])
+    send_data @image.photo_content, :type => 'image/jpg'
+  end
+
 end
