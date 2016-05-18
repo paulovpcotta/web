@@ -116,6 +116,7 @@ GEM
     minitest (5.8.4)
     multi_json (1.11.3)
     multi_xml (0.5.5)
+    nested_form (0.3.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     nokogiri (1.6.7.2-x86-mingw32)
@@ -219,6 +220,7 @@ DEPENDENCIES
   jquery-inputmask-rails!
   jquery-rails
   json
+  nested_form
   nokogiri
   paperclip (~> 4.3)
   pg

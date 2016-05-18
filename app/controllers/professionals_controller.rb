@@ -20,7 +20,33 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.new
     @professional.address = Address.new
     @professional.address.city = City.new
-    @city_list = {}
+    @professional_service = ProfessionalService.new
+    @services = {}
+    session[:professional] = @professional
+  end
+
+  # GET /professional/professional_services/new
+  def new_professional_services
+    @professional = Professional.new(session[:professional])
+    @professional_service = ProfessionalService.new
+    @professional_service.service = Service.new
+    @services = {}
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # POST /professional_services
+  def create_professional_services
+    @professional_service = ProfessionalService.new(professional_service_params)
+    @professional = Professional.new(session[:professional])
+    @professional.professional_services.push(@professional_service)
+    respond_to do |format|
+      format.js
+    end
+  end
+  # GET /professional_services/1/edit
+  def edit_professional_services
   end
 
   # GET /professionals/1/edit
@@ -47,8 +73,16 @@ class ProfessionalsController < ApplicationController
     @address.city =  City.find_by_name addressFound[:city]
     @address.cep  = params[:id]
     @city_list = City.find_by_state_id @address.city.state_id
-    @professional = Professional.new
+    @professional = Professional.new(session[:professional])
     @professional.address = @address
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update_services
+    serviceList  = Service.where(:category_id => params[:category_id])
+    @services = serviceList.map{|a| [a.name, a.id]}.insert(0, "Selecione")
     respond_to do |format|
       format.js
     end
@@ -78,6 +112,10 @@ class ProfessionalsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def professional_params
       params.require(:professional).permit!
+    end
+    # Only allow a trusted parameter "white list" through.
+    def professional_service_params
+      params.require(:professional_service).permit!
     end
 
 end
