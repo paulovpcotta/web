@@ -14,6 +14,10 @@ class ProfessionalService < ActiveRecord::Base
   validates_presence_of :active,:price, :service_id, :service_unit_id,:professional_id, :created_at, :updated_at
 
   scope :active, -> {where ("excluded_at IS NULL and professional_services.active = TRUE")}
+  
+  scope :enterprise_service, -> {where ("char_length(users.cpf) > 11")}
+  
+  scope :worker_service, -> {where ("char_length(users.cpf) <= 11")}
 
   public
 

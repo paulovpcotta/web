@@ -1,7 +1,7 @@
 class Professional < ActiveRecord::Base
   # has_one :address
   # has_one :phone
-  # belongs_to :user
+  belongs_to :user
 
   has_many :professional_district_coverages
   has_many :professional_city_coverages
