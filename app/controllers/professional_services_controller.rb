@@ -24,8 +24,6 @@ class ProfessionalServicesController < ApplicationController
     conditions = create_conditions
     search_index(joins, clause_search_bar, conditions)
   end
-  
-  
 
   # GET /professional_services/1
   def show
@@ -89,9 +87,9 @@ class ProfessionalServicesController < ApplicationController
   end
 
   # Only allow a trusted parameter "white list" through.
-  #def professional_service_params
-  #  params.require(:professional_service).permit!
-  #end
+  def professional_service_params
+    params.require(:professional_service).permit!
+  end
   
   def get_clause_search_bar
       clause_search_bar = "cities.name like \'#{@city_name}%\'" 
