@@ -1,15 +1,17 @@
 module ProfessionalServicesHelper
 
 require_relative '../usefull/query_creator.rb'
+parametros_clonado = {}
 
 public
   def count_service_per_category(category_id)
     clause_price = get_clause_price
     
     q = QueryCreator.new()
-    params[:category_id] = category_id
-    joins = q.create_joins_professional_service_index(params)    
-    conditions = q.create_conditions_professional_service_index(params)
+    parametros_clonado = params.clone
+    parametros_clonado[:category_id] = category_id
+    joins = q.create_joins_professional_service_index(parametros_clonado)    
+    conditions = q.create_conditions_professional_service_index(parametros_clonado)
     
     if !category_id.nil? and conditions["categories"].nil?
       conditions["categories"] = {id: category_id}       
@@ -19,15 +21,41 @@ public
       
     ProfessionalService.joins(joins)
       .where(conditions).where(clause_price).size 
-         
+  end
+  
+  def count_service_per_district(district_id)
+    clause_price = get_clause_price
+    
+    q = QueryCreator.new()
+    parametros_clonado = params.clone
+    parametros_clonado[:district_id] = district_id
+    joins = q.create_joins_professional_service_index(parametros_clonado)    
+    conditions = q.create_conditions_professional_service_index(parametros_clonado)
+    
+    if !district_id.nil? and conditions["districts"].nil?
+      conditions["districts"] = {id: district_id}       
+    end
+    
+    joins_with_professional = joins['professional']
+    join_districts = {}
+    join_districts['professional_district_coverages'] = 'district'
+    
+    if !joins_with_professional.nil? and !joins_with_professional.include?(join_districts)      
+      joins_with_professional << join_districts  
+    end
+    
+      
+    ProfessionalService.joins(joins)
+      .where(conditions).where(clause_price).size
   end
   
   def count_service_per_kind_of_person(bol_company = nil)
     clause_price = get_clause_price
     
-    q = QueryCreator.new()    
-    joins = q.create_joins_professional_service_index(params)    
-    conditions = q.create_conditions_professional_service_index(params)   
+    q = QueryCreator.new()
+    parametros_clonado = params.clone    
+    joins = q.create_joins_professional_service_index(parametros_clonado)    
+    conditions = q.create_conditions_professional_service_index(parametros_clonado)   
       
     if !bol_company.nil?
       if bol_company

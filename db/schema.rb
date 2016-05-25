@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522024801) do
+ActiveRecord::Schema.define(version: 20160525011925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,12 @@ ActiveRecord::Schema.define(version: 20160522024801) do
   end
 
   add_index "professions", ["active"], name: "index_professions_on_active", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.binary   "photo_content"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "service_professional_feedbacks", force: :cascade do |t|
     t.integer  "professional_service_id"

@@ -7,7 +7,7 @@ class ProfessionalService < ActiveRecord::Base
 
   has_one :service_unit
 
-  has_one :user, through: :professional, source: :professional_professions
+  has_one :user, through: :professional
   has_many :professional_profession, through: :professional, source: :professional_professions
 
   has_many :service_professional_feedbacks

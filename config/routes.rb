@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   resources :professional_professions
   resources :service_professional_feedbacks
   resources :professionals
