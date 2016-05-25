@@ -1,0 +1,27 @@
+<table>
+  <thead>
+  <tr>
+    <th>Category</th>
+    <th>Service</th>
+    <th>Price</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  </tbody>
+</table>
+
+<button class="btn btn-primary btn-lg" id="openBtn" onclick="return false;">
+  Add Service
+</button>
+<script>
+  $("#openBtn").click(function () {
+    $.ajax({
+      url: '<%=professionals_new_professional_services_path%>',
+      type: "GET"
+    });
+  });
+
+</script>
