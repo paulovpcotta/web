@@ -278,13 +278,10 @@
                             <div class="item-list">
                                 <div class="col-sm-2 no-padding photobox">
                                     <div class="add-image">
-                                        <span class="photo-count"><i class="fa fa-camera"></i> <%= professional_service.professional_profession.first.professional_profession_images.count %></span>
+                                        <!--<span class="photo-count"><i class="fa fa-camera"></i> <%= professional_service.professional_profession.first.professional_profession_images.count %></span>-->
                                         <%= link_to professional_service do %>
-                                          <% if (!professional_service.professional_profession.first.professional_profession_images.nil? &&
-                                                professional_service.professional_profession.first.professional_profession_images.any?) %>
-                                            <%= image_tag professional_service.professional_profession.first.professional_profession_images[0].photo_content.url, class: 'thumbnail
-          no-margin' %>
-                                              <%= image_tag url_for(:controller => "professional_service", :action => "show_image_professional", :id => professional_service.professional_profession.first.professional_profession_images[0].id) %>
+                                          <% if (!professional_service.profile.nil?) %>
+                                            <%= image_tag (professional_service.profile.avatar.url(:thumb)), class: 'thumbnail no-margin' %>                                             
                                             <% end %>
                                           <% end %>    
                                       </div>
