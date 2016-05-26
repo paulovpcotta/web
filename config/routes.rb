@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   resources :professional_professions
   resources :service_professional_feedbacks
   resources :professionals
@@ -10,10 +11,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: "users/sessions",confirmations: "users/confirmations", registrations: "users/registrations", passwords: "users/passwords"}
   get 'cep/search/:id' =>  'cep#search', as: 'cep_search'
   get 'professionals/cep/:id' =>  'professionals#search', as: 'professionals_search'
-  get 'professionals/service/update_services' =>  'professionals#update_services', as: 'update_services'
-  get 'professional/professional_services/new' =>  'professionals#new_professional_services', as: 'professionals_new_professional_services'
-  post 'professional/professional_services/create' =>  'professionals#create_professional_services', as: 'professionals_create_professional_services', :defaults => { :format => 'js' }
-  get 'professional/professional_services/:service_id/edit' =>  'professionals#edit_professional_services', as: 'professionals_edit_professional_services'
+
   resources :professions
 
   devise_scope :user do

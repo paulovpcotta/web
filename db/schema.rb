@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511220240) do
+ActiveRecord::Schema.define(version: 20160525011925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "categories", ["active"], name: "index_categories_on_active", using: :btree
+
   create_table "cities", force: :cascade do |t|
     t.string   "name"
     t.boolean  "active"
@@ -45,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "cities", ["active"], name: "index_cities_on_active", using: :btree
   add_index "cities", ["state_id"], name: "index_cities_on_state_id", using: :btree
 
   create_table "districts", force: :cascade do |t|
@@ -55,6 +58,7 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "districts", ["active"], name: "index_districts_on_active", using: :btree
   add_index "districts", ["city_id"], name: "index_districts_on_city_id", using: :btree
 
   create_table "phones", force: :cascade do |t|
@@ -71,7 +75,9 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.datetime "updated_at",      null: false
   end
 
+  add_index "professional_city_coverages", ["city_id", "professional_id"], name: "idx_city_professional", using: :btree
   add_index "professional_city_coverages", ["city_id"], name: "index_professional_city_coverages_on_city_id", using: :btree
+  add_index "professional_city_coverages", ["created_at"], name: "index_professional_city_coverages_on_created_at", using: :btree
   add_index "professional_city_coverages", ["professional_id"], name: "index_professional_city_coverages_on_professional_id", using: :btree
 
   create_table "professional_district_coverages", force: :cascade do |t|
@@ -81,6 +87,8 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.datetime "updated_at",      null: false
   end
 
+  add_index "professional_district_coverages", ["created_at"], name: "index_professional_district_coverages_on_created_at", using: :btree
+  add_index "professional_district_coverages", ["district_id", "professional_id"], name: "idx_district_professional", using: :btree
   add_index "professional_district_coverages", ["district_id"], name: "index_professional_district_coverages_on_district_id", using: :btree
   add_index "professional_district_coverages", ["professional_id"], name: "index_professional_district_coverages_on_professional_id", using: :btree
 
@@ -93,7 +101,7 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.text     "photo_content"
+    t.binary   "photo_content"
   end
 
   add_index "professional_profession_images", ["professional_profession_id"], name: "idx_serv_img_on_serv_ad_id", using: :btree
@@ -116,6 +124,12 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.integer  "professional_id"
   end
 
+  add_index "professional_services", ["active", "service_id", "professional_id"], name: "idx_active_service_professional", using: :btree
+  add_index "professional_services", ["active", "service_id"], name: "idx_active_service", using: :btree
+  add_index "professional_services", ["active"], name: "index_professional_services_on_active", using: :btree
+  add_index "professional_services", ["created_at"], name: "index_professional_services_on_created_at", using: :btree
+  add_index "professional_services", ["excluded_at"], name: "index_professional_services_on_excluded_at", using: :btree
+  add_index "professional_services", ["service_id", "professional_id"], name: "idx_service_professional", using: :btree
   add_index "professional_services", ["service_id"], name: "index_professional_services_on_service_id", using: :btree
   add_index "professional_services", ["service_unit_id"], name: "index_professional_services_on_service_unit_id", using: :btree
 
@@ -129,12 +143,26 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.datetime "updated_at",        null: false
   end
 
+  add_index "professionals", ["active", "address_id"], name: "idx_active_address", using: :btree
+  add_index "professionals", ["active", "phone_id"], name: "idx_active_phone", using: :btree
+  add_index "professionals", ["active", "user_id"], name: "idx_active_user", using: :btree
+  add_index "professionals", ["active"], name: "index_professionals_on_active", using: :btree
+  add_index "professionals", ["created_at"], name: "index_professionals_on_created_at", using: :btree
+
   create_table "professions", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.boolean  "active"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  add_index "professions", ["active"], name: "index_professions_on_active", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.binary   "photo_content"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "service_professional_feedbacks", force: :cascade do |t|
@@ -161,7 +189,10 @@ ActiveRecord::Schema.define(version: 20160511220240) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "services", ["active", "category_id"], name: "index_services_on_active_and_category_id", using: :btree
+  add_index "services", ["active"], name: "index_services_on_active", using: :btree
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
+  add_index "services", ["created_at"], name: "index_services_on_created_at", using: :btree
 
   create_table "states", force: :cascade do |t|
     t.string   "sign"

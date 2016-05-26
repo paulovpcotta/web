@@ -3,9 +3,12 @@
       <%= f.hidden_field :user_id %>
       <%= f.hidden_field :active %>
       <%= render partial: 'address', locals: {address: @professional.address,f:f} %>
-
-          <%= f.primary 'Submit' %>
-
+      <div class="form-group">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8">
+          <%= f.submit 'Submit', class:"btn btn-success btn-lg" %>
+        </div>
+      </div>
     </fieldset>
 <% end %>
 <div id="new_professional_service">

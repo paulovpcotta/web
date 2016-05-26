@@ -105,6 +105,7 @@ pt:
       order_by: 'Ordenar'
       low_price: 'Menor Preço'
       high_price: 'Maior Preço'
+      go: 'Ir'
     new:
       title: 'Faça aqui seu anúncio grátis'
       howtosell: 'Como se tornar um kabrabom?'

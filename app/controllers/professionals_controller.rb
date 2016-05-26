@@ -49,6 +49,7 @@ class ProfessionalsController < ApplicationController
   end
   # GET /professional_services/1/edit
   def edit_professional_services
+    @city_list = {}
   end
 
   # GET /professionals/1/edit
@@ -75,16 +76,8 @@ class ProfessionalsController < ApplicationController
     @address.city =  City.find_by_name addressFound[:city]
     @address.cep  = params[:id]
     @city_list = City.find_by_state_id @address.city.state_id
-    @professional = Professional.new(session[:professional])
+    @professional = Professional.new
     @professional.address = @address
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def update_services
-    serviceList  = Service.where(:category_id => params[:category_id])
-    @services = serviceList.map{|a| [a.name, a.id]}.insert(0, "Selecione")
     respond_to do |format|
       format.js
     end
@@ -114,10 +107,6 @@ class ProfessionalsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def professional_params
       params.require(:professional).permit!
-    end
-    # Only allow a trusted parameter "white list" through.
-    def professional_service_params
-      params.require(:professional_service).permit!
     end
 
 end

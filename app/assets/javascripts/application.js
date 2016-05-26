@@ -14,5 +14,4 @@
 #= require jquery_ujs
 #= require twitter/bootstrap
 //= require jquery.inputmask.bundle
-//= require jquery_nested_form
 #= require_tree .

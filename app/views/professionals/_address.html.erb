@@ -1,7 +1,7 @@
 
 <div id="form_address">
 <%= f.fields_for :address do |a| %>
-        <%= a.text_field :cep, label_col: "col-md-4", control_col: "col-md-6", data: {inputmask: "'mask': '99999-999'"}, class:"form-control" , append: link_to("Buscar", "#", class: "btn btn-default", id: "buscarCep", onclick: "return false;") %>
+        <%= a.text_field :cep, data: {inputmask: "'mask': '99999-999'"}, class:"form-control" , label_col: "col-md-4", control_col: "col-md-4" , append: link_to("Buscar", "#", class: "btn btn-default", id: "buscarCep", onclick: "return false;") %>
 
         <script>
           $("#buscarCep").click(function () {
