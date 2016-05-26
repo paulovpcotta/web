@@ -8,4 +8,9 @@
 
     </fieldset>
 <% end %>
+<div id="new_professional_service">
 <%= render partial: 'professional_services_form', locals: {services: @services,professional_service: @professional_service} %>
+</div>
+<div id="form_professional_services">
+  <%= render partial: 'professional_services_fields' %>
+</div>

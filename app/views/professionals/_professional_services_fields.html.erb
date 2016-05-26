@@ -9,19 +9,16 @@
   </thead>
 
   <tbody>
-
+  <% @professional.professional_services.each do |ps| %>
+      <tr>
+        <td><%= ps.service.category.id %></td>
+        <td><%= ps.service.id %></td>
+        <td><%= ps.price %></td>
+        <td><%= link_to 'Show', ps %></td>
+        <td><%= link_to 'Edit' %></td>
+        <td><%= link_to 'Destroy', ps, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
   </tbody>
 </table>
-
-<button class="btn btn-primary btn-lg" id="openBtn" onclick="return false;">
-  Add Service
-</button>
-<script>
-  $("#openBtn").click(function () {
-    $.ajax({
-      url: '<%=professionals_new_professional_services_path%>',
-      type: "GET"
-    });
-  });
-
-</script>
+<%= link_to "Add Service", professionals_new_professional_services_path, remote: true, class: "btn btn-primary" %>

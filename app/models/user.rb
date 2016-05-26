@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :phone
+  belongs_to :phone
 
   has_many :service_professional_feedbacks
   has_many :professionals

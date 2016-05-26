@@ -13,7 +13,7 @@ class ProfessionalService < ActiveRecord::Base
   accepts_nested_attributes_for :service_professional_feedbacks
   accepts_nested_attributes_for :service
 
-  validates_presence_of :active,:price, :service_id, :service_unit_id,:professional_id, :created_at, :updated_at
+  validates_presence_of :active,:price,  :created_at, :updated_at
 
   scope :active, -> {where ("excluded_at IS NULL and active = TRUE")}
 

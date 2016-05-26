@@ -1,8 +1,7 @@
-<%= bootstrap_form_for(@professional_service,:url => url_for(:controller => 'professionals', :action => 'create_professional_services') , layout: :horizontal,:format => :js,:remote =>true , inline_errors: false) do |form| %>
 <div class="modal fade" id="professionalServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <%= bootstrap_form_for(@professional_service,:url => url_for(:controller => 'professionals', :action => 'create_professional_services') , layout: :horizontal,:format => :js,:remote =>true , inline_errors: false) do |form| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title-site text-center">Modal title</h4>
@@ -34,13 +33,11 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <%= form.primary 'Submit' %>
       </div>
-
+      <% end %>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-    <div id="form_professional_services">
-     <%= render partial: 'professional_services_fields' %>
-    </div>
-<% end %>
+
+
 
 

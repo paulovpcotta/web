@@ -39,8 +39,10 @@ class ProfessionalsController < ApplicationController
   # POST /professional_services
   def create_professional_services
     @professional_service = ProfessionalService.new(professional_service_params)
+    @professional_service.service = Service.find professional_service_params[:service_id]
     @professional = Professional.new(session[:professional])
     @professional.professional_services.push(@professional_service)
+    session[:professional] = @professional
     respond_to do |format|
       format.js
     end
