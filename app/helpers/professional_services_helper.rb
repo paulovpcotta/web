@@ -3,7 +3,8 @@ module ProfessionalServicesHelper
 require_relative '../usefull/query_creator.rb'
 parametros_clonado = {}
 
-public
+  public
+  
   def count_service_per_category(category_id)
     clause_price = get_clause_price
     
@@ -80,5 +81,30 @@ public
     end
     clause_price
   end
+  
+  
+ def get_url_list_professional_service(filtrosAtuais, ordenacoesAtuais = [])
+   url = "list_professional_service?city_name=#{@city_name}&service_name=#{@service_name}"
+   if filtrosAtuais.include?("category")
+     url += "#{'&category_id='+@category_id unless @category_id.blank?}"
+   end
+   if filtrosAtuais.include?("district")
+     url += "#{'&district_id='+@district_id unless @district_id.blank?}"
+   end
+   if filtrosAtuais.include?("min_price")
+     url += "#{'&min_price='+@min_price unless @min_price.blank?}"
+   end
+   if filtrosAtuais.include?("max_price")
+     url += "#{'&max_price='+@max_price unless @max_price.blank?}"
+   end
+   if filtrosAtuais.include?("bol_company")
+     url += "#{'&bol_company='+@bol_company.to_s unless @bol_company.nil?}"
+   end
+   
+   if ordenacoesAtuais.include?("by_lower_price")
+     url += "#{'&by_lower_price='+@by_lower_price.to_s unless @by_lower_price.nil?}"
+   end
+   url
+ end
 
 end

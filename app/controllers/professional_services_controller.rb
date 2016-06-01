@@ -90,13 +90,24 @@ class ProfessionalServicesController < ApplicationController
   end
   
   def get_clause_search_bar
-      clause_search_bar = "cities.name like \'#{@city_name}%\'" 
-      if(!@city_name.nil? and !@city_name.blank? and !@service_name.nil? and !@service_name.blank?)
-        clause_search_bar += " and"
-      else
-        clause_search_bar +=" or"
+      clause_search_bar = ""
+      
+      if(!@city_name.nil? and !@city_name.blank? )
+        clause_search_bar = "lower(cities.name) like lower\'#{@city_name}%\')"  
       end
-      clause_search_bar += " services.name like \'#{@service_name}%\'"
+       
+      if !clause_search_bar.blank?
+        if(!@city_name.nil? and !@city_name.blank? and !@service_name.nil? and !@service_name.blank?)
+          clause_search_bar += " and"
+        else
+          clause_search_bar +=" or"
+        end  
+      end
+      
+      if(!@service_name.nil? and !@service_name.blank? )
+        clause_search_bar += " lower(services.name) like lower(\'#{@service_name}%\')"  
+      end       
+      
       clause_search_bar
   end
   
@@ -111,18 +122,24 @@ class ProfessionalServicesController < ApplicationController
       if @bol_company
         @professional_services = ProfessionalService.joins(joins, :service).where(conditions)
         .where(clause_search_bar).where(clause_price)
-        .active.enterprise_service.limit(@limit_list).find_each
+        .active.enterprise_service.limit(@limit_list)
       else
          @professional_services = ProfessionalService.joins(joins, :service).where(conditions)
         .where(clause_search_bar).where(clause_price)
-        .active.worker_service.limit(@limit_list).find_each 
+        .active.worker_service.limit(@limit_list)
       end
     else
       @professional_services = ProfessionalService.joins(joins, :service).where(conditions)
         .where(clause_search_bar).where(clause_price)
-        .active.limit(@limit_list).find_each            
-    end     
-            
+        .active.limit(@limit_list) 
+    end 
+    
+    if(params.key?('by_lower_price') and !params['by_lower_price'].nil?)
+      order_by_price
+    end
+    
+    @professional_services = Kaminari.paginate_array(@professional_services).page(params[:page]).per(2)
+    
   end
   
   def load_filters
@@ -163,6 +180,17 @@ class ProfessionalServicesController < ApplicationController
   def load_combos_boxes
     @all_categories = Category.order :name
     @all_locations = District.order :name    
-  end    
+  end   
+  
+  def order_by_price()
+    @by_lower_price = params['by_lower_price']
+    if(params['by_lower_price'] == 'true')
+      @professional_services = @professional_services.sort { |a, b| a.price <=> b.price }
+    else
+      @professional_services = @professional_services.sort { |a, b| b.price <=> a.price }
+    end
+  end 
+  
+  
   
 end

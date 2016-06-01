@@ -45,14 +45,16 @@
                               	<% if @category_id.nil? or @category_id.blank?%>
                               	<li><strong>                              		
                               			<span class= "title">
-		                              		<%= link_to raw("Todas"), "list_professional_service"%>
+		                              		<%= link_to raw("Todas"),
+		                              		get_url_list_professional_service(["district", "min_price", "max_price", "bol_company"], ["by_lower_price"])
+		                              		%>
 		                             	</span>		                             
 		                        </li></strong>
                               	<% else %>
                               		<li>
                               			<span class= "title">
 		                              		<%= link_to raw("Todas"),
-		                              		"list_professional_service?#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}#{'&bol_company='+@bol_company.to_s unless @bol_company.nil?}"
+		                              		get_url_list_professional_service(["district", "min_price", "max_price", "bol_company"], ["by_lower_price"])
 		                              		%>
 		                             	</span></li>
                               	<% end %>
@@ -63,14 +65,14 @@
                                             	<strong>
                                               		<span class= "title">
                                               			<%= link_to raw("#{category.name} <span class='count'>&nbsp;#{count_service_per_category(category.id)}</span>"), 
-                                              			"list_professional_service?category_id=#{category.id}#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}#{'&bol_company='+@bol_company.to_s unless @bol_company.nil?}"
+                                              			get_url_list_professional_service(["district", "min_price", "max_price", "bol_company"], ["by_lower_price"])+"&category_id=#{category.id}"
                                               			 %>                                                		
                                             		</span>
                                             	</strong>
                                             <% else %>
                                               <span class= "title" >                                              	
                                               	<%= link_to raw("#{category.name} <span class='count'>&nbsp;#{count_service_per_category(category.id)}</span>"), 
-                                              	"list_professional_service?category_id=#{category.id}#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}#{'&bol_company='+@bol_company.to_s unless @bol_company.nil?}"
+                                              	get_url_list_professional_service(["district", "min_price", "max_price", "bol_company"], ["by_lower_price"])+"&category_id=#{category.id}"
                                               	 %>                                                
                                             </span>
                                             <% end %>                                                                                                                        
@@ -88,14 +90,16 @@
                               	<% if @district_id.nil? or @district_id.blank?%>
                               	<li><strong>                              		
                               			<span class= "title">
-		                              		<%= link_to raw("Todas"), "list_professional_service" %>
+		                              		<%= link_to raw("Todas"),
+		                              		get_url_list_professional_service(["category", "min_price", "max_price", "bol_company"], ["by_lower_price"])
+		                              		%>
 		                             	</span>		                             
 		                        </li></strong>
                               	<% else %>
                               		<li>
                               			<span class= "title">
 		                              		<%= link_to raw("Todas"),
-		                              		"list_professional_service?#{'&category_id='+@category_id unless @category_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}#{'&bol_company='+@bol_company.to_s unless @bol_company.nil?}"
+		                              		get_url_list_professional_service(["category", "min_price", "max_price", "bol_company"], ["by_lower_price"])
 		                              		%>
 		                             	</span></li>
                               	<% end %>
@@ -107,14 +111,14 @@
                                             	<strong>
                                               		<span class= "title">
                                               			<%= link_to raw("#{district.name} <span class='count'>&nbsp;#{count_service_per_district(district.id)}</span>"), 
-                                              			"list_professional_service?district_id=#{district.id}#{'&category_id='+@category_id unless @category_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}#{'&bol_company='+@bol_company.to_s unless @bol_company.nil?}"
+                                              			get_url_list_professional_service(["category", "min_price", "max_price", "bol_company"], ["by_lower_price"])+"&district_id=#{district.id}"
                                               			%>                                                		
                                             		</span>
                                             	</strong>
                                             <% else %>
                                               <span class= "title" >                                              	
                                               	<%= link_to raw("#{district.name} <span class='count'>&nbsp;#{count_service_per_district(district.id)}</span>"), 
-                                              			"list_professional_service?district_id=#{district.id}#{'&category_id='+@category_id unless @category_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}#{'&bol_company='+@bol_company.to_s unless @bol_company.nil?}"
+                                              			get_url_list_professional_service(["category", "min_price", "max_price", "bol_company"], ["by_lower_price"])+"&district_id=#{district.id}"
                                               	%>                                                
                                             </span>
                                             <% end %>                                                                              
@@ -171,14 +175,15 @@
                               	<li><strong>                              		
                               			<span class= "title">
 		                              		<%= link_to raw("Todos <span class='count'>&nbsp;#{count_service_per_kind_of_person()}</span>"),
-		                              		"list_professional_service?#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}"%>
+		                              		get_url_list_professional_service(["category", "district", "min_price", "max_price"], ["by_lower_price"])
+		                              		%>
 		                             	</span>		                             
 		                        </li></strong>
                               	<% else %>
                               		<li>
                               			<span class= "title">
 		                              		<%= link_to raw("Todos <span class='count'>&nbsp;#{count_service_per_kind_of_person()}</span>"),
-		                              		"list_professional_service?#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}"
+		                              		get_url_list_professional_service(["category", "district", "min_price", "max_price"], ["by_lower_price"])
 		                              		%>
 		                             	</span></li>
                               	<% end %>                              			
@@ -187,15 +192,15 @@
                                             <% if @bol_company == true %>
                                             	<strong>
                                               		<span class= "title">
-                                              			<%= link_to raw("#{t('.company')} <span class='count'>&nbsp;#{count_service_per_kind_of_person(true)}</span>"), 
-                                              			"list_professional_service?bol_company=#{true}#{'&category_id='+@category_id unless @category_id.blank?}#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}"
+                                              			<%= link_to raw("#{t('.company')} <span class='count'>&nbsp;#{count_service_per_kind_of_person(true)}</span>"),
+                                              			get_url_list_professional_service(["category", "district", "min_price", "max_price"], ["by_lower_price"])+"&bol_company=#{true}" 
                                               			 %>                                                		
                                             		</span>
                                             	</strong>
                                             <% else %>
                                               <span class= "title" >                                              	
                                               	<%= link_to raw("#{t('.company')} <span class='count'>&nbsp;#{count_service_per_kind_of_person(true)}</span>"), 
-                                              	"list_professional_service?bol_company=#{true}#{'&category_id='+@category_id unless @category_id.blank?}#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}"
+                                              	get_url_list_professional_service(["category", "district", "min_price", "max_price"], ["by_lower_price"])+"&bol_company=#{true}"
                                               	 %>                                                
                                             </span>
                                             <% end %>                                                                                                                        
@@ -205,14 +210,14 @@
                                             	<strong>
                                               		<span class= "title">
                                               			<%= link_to raw("#{t('.particular')} <span class='count'>&nbsp;#{count_service_per_kind_of_person(false)}</span>"), 
-                                              			"list_professional_service?bol_company=#{false}#{'&category_id='+@category_id unless @category_id.blank?}#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}"
+                                              			get_url_list_professional_service(["category", "district", "min_price", "max_price"], ["by_lower_price"])+"&bol_company=#{false}"
                                               			 %>                                                		
                                             		</span>
                                             	</strong>
                                             <% else %>
                                               <span class= "title" >                                              	
                                               	<%= link_to raw("#{t('.particular')} <span class='count'>&nbsp;#{count_service_per_kind_of_person(false)}</span>"), 
-                                              	"list_professional_service?bol_company=#{false}#{'&category_id='+@category_id unless @category_id.blank?}#{'&district_id='+@district_id unless @district_id.blank?}#{'&min_price='+@min_price unless @min_price.blank?}#{'&max_price='+@max_price unless @max_price.blank?}"
+                                              	get_url_list_professional_service(["category", "district", "min_price", "max_price"], ["by_lower_price"])+"&bol_company=#{false}"
                                               	 %>                                                
                                             </span>
                                             <% end %>                                                                                                                        
@@ -249,13 +254,20 @@
                               </li>
 
                           </ul>
-                          <div class="tab-filter">
-                              <select class="selectpicker" data-style="btn-select" data-width="auto">
-                                  <option><%= t('.order_by') %></option>
-                                  <option><%= t('.low_price') %></option>
-                                  <option><%= t('.high_price') %></option>
-                              </select>
-                          </div>
+                          
+                          <div class="tab-filter" style="margin-top:5px; margin-right:5px;">
+						      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						        <%= t('.order_by') %> <span class="caret"></span>
+						      </button>						      
+							      <ul class="dropdown-menu" role="menu">
+							        <li><%= link_to "#{t('.low_price')}",
+							        get_url_list_professional_service(["category", "district", "min_price", "max_price", "bol_company"])+ "&by_lower_price=#{true}" %></li>
+							        <li><%= link_to "#{t('.high_price')}",
+							        get_url_list_professional_service(["category", "district", "min_price", "max_price", "bol_company"])+ "&by_lower_price=#{false}" %></li>
+							      </ul>
+							      
+						 </div>                          
+                          
                       </div>
                       <!--/.tab-box-->
 
@@ -294,7 +306,7 @@
                                               <span class="add-type business-ads tooltipHere" data-toggle="tooltip" data-placement="right"
                                                     title="Profissional Autônomo"><i class="fa icon-user-2"></i> </span>
                                               <span class="date"><i class=" icon-person"> </i> <%= User.find(professional_service.user).first_name %> <%= User.find(professional_service.user.id).last_name %> </span>
-                                              - <span class="item-location"><i class="fa fa-map-marker"></i> New York </span>
+                                              - <span class="item-location"><i class="fa fa-map-marker"></i> <%= professional_service.professional.address.city.state.name %> </span>
                                           </span>
                                           <span class="info-row">
                                               <i class=" icon-star" style="color:gold"> </i>
@@ -328,23 +340,14 @@
                             <a href=""> <i class=" icon-star-empty"></i> Save Search </a></div>
                     </div>
                     <div class="pagination-bar text-center">
-                        <ul class="pagination">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#"> ...</a></li>
-                            <li><a class="pagination-btn" href="#">Next &raquo;</a></li>
-                        </ul>
+                    	<%= paginate @professional_services %>                        
                     </div>
                     <!--/.pagination-bar -->
 
                     <div class="post-promo text-center">
-                        <h2> Do you get anything for sell ? </h2>
-                        <h5>Sell your products online FOR FREE. It's easier than you think !</h5>
-                        <a href="post-ads.html" class="btn btn-lg btn-border btn-post btn-danger">Post a Free
-                            Ad </a></div>
+                        <h2> Você é um Kabra Bom ? </h2>
+                        <h5>Cadastre agora o seu serviço sem custo algum. É mais fácil do que imagina!</h5>
+                        <a href="post-ads.html" class="btn btn-lg btn-border btn-post btn-danger">Cadastre Agora </a></div>
                     <!--/.post-promo-->
 
                 </div>
