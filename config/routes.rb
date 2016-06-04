@@ -32,8 +32,10 @@ Rails.application.routes.draw do
 
   get "list_professional_service" => "professional_services#index"
 
-  get "professional_service/show_image_professional" => "professional_service#show_image_professional"
-
+  get "new_profile" => "profiles#new"
+  
+  get "view_profile" => "profiles#index"
+  
   # Example of regular route:
   #
 

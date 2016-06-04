@@ -30,8 +30,6 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
     <%= javascript_include_tag "application" %>
-    <script src="/plugins/jquery.fs.selecter/jquery.fs.selecter.js"></script>
-    <script src="/plugins/jquery.fs.scroller/jquery.fs.scroller.js"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -131,8 +129,14 @@
     <!-- /.footer -->
   </div>
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"> </script><script src="/bootstrap/js/bootstrap.min.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"> </script>
+  
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  
+  <script>
+    $('.dropdown-toggle').dropdown()
+  </script>
+  
   <!-- include carousel slider plugin  -->
   <script src="/js/owl.carousel.min.js"></script>
 

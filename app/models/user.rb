@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :phone
+  has_one :profile
 
   has_many :service_professional_feedbacks
   has_many :professionals
