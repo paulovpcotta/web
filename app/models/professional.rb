@@ -20,7 +20,7 @@ class Professional < ActiveRecord::Base
   accepts_nested_attributes_for :phone, allow_destroy: true
   accepts_nested_attributes_for :professional_services, allow_destroy: true
 
-  validates_presence_of :active,:user_id, :nothing_on_record, :phone_id, :address_id, :created_at, :updated_at
+  validates_presence_of :active,:user_id, :address, :phone
 
   scope :active, -> {where ("active = TRUE")}
 end

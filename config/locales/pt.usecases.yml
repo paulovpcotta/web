@@ -106,8 +106,9 @@ pt:
       low_price: 'Menor Preço'
       high_price: 'Maior Preço'
       go: 'Ir'
+  professionals:
     new:
-      title: 'Faça aqui seu anúncio grátis'
+      title: 'Faça aqui seu cadastro de Kabrabom'
       howtosell: 'Como se tornar um kabrabom?'
       howtosell_item1: 'Escreva um titulo claro e uma descrição detalhada do seu trabalho'
       howtosell_item2: 'Confira se o produto está classificado corretamente de acordo com a categoria e o tipo de serviço.'
@@ -121,6 +122,7 @@ pt:
       helpTitle: Um bom titulo deve ter no minimo 60 caracteres
       helpDescription: Inclua aqui o maior numero de detalhes do serviço a ser executado
       realphotos: Adicione até 5 fotos. Inclua fotos reais do seu trabalho.
+      first_page_submit: Avançar
   activerecord:
     models:
       profession:
@@ -166,8 +168,11 @@ pt:
         num: Número
         complement: Complemento
         district: Bairro
-        city: Cidade
-        state: Estado
+        city_id: Cidade
+        state_id: Estado
+      city:
+        city_id: Cidade
+        state_id: Estado
       phone:
         ddd: Ddd
         phone: Telefone

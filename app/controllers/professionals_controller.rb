@@ -3,6 +3,7 @@
 class ProfessionalsController < ApplicationController
 
   require 'correios-cep'
+  before_filter :authenticate_user!, only: [:new]
 
   before_action :set_professional, only: [:show, :edit, :update, :destroy]
 
@@ -18,10 +19,14 @@ class ProfessionalsController < ApplicationController
   # GET /professionals/new
   def new
     @professional = Professional.new
+    @professional.user_id = current_user.id
+    @professional.active = true
     @professional.address = Address.new
-    @professional.address.city = City.new
+    #@professional.address.city = City.new
+    @professional.phone = Phone.new
     @professional_service = ProfessionalService.new
     @services = {}
+    @city_list = {}
     session[:professional] = @professional
   end
 
@@ -31,6 +36,21 @@ class ProfessionalsController < ApplicationController
     @professional_service = ProfessionalService.new
     @professional_service.service = Service.new
     @services = {}
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update_services
+    serviceList  = Service.where(:category_id => params[:category_id])
+    @services = serviceList.map{|a| [a.name, a.id]}.insert(0, "Selecione")
+    respond_to do |format|
+      format.js
+    end
+  end
+  def update_city_list
+    cityList = City.where(:state_id => params[:state_id])
+    @city_list = cityList.map{|a| [a.name, a.id]}.insert(0, "Selecione")
     respond_to do |format|
       format.js
     end
@@ -60,8 +80,13 @@ class ProfessionalsController < ApplicationController
   def create
     @professional = Professional.new(professional_params)
     if @professional.save
-      redirect_to @professional, notice: t('helpers.messages.save' , model:t('activerecord.models.professional.one'))
+      @professional_service = ProfessionalService.new
+      render :new_part2
     else
+      @city_list = {}
+      if(@professional.address.state_id.present?)
+        @city_list = City.where(:state_id => @professional.address.state_id)
+      end
       render :new
     end
   end
@@ -73,9 +98,11 @@ class ProfessionalsController < ApplicationController
     @address = Address.new
     @address.main =  addressFound[:address]
     @address.district =  addressFound[:neighborhood]
-    @address.city =  City.find_by_name addressFound[:city]
+    city = City.find_by_name addressFound[:city]
+    @address.city_id =  city.id
+    @address.state_id =  city.state_id
     @address.cep  = params[:id]
-    @city_list = City.find_by_state_id @address.city.state_id
+    @city_list = City.where(:state_id => city.state_id)
     @professional = Professional.new
     @professional.address = @address
     respond_to do |format|
@@ -108,6 +135,10 @@ class ProfessionalsController < ApplicationController
     def professional_params
       params.require(:professional).permit!
     end
+    # Only allow a trusted parameter "white list" through.
+     def professional_service_params
+       params.require(:professional_service).permit!
+     end
 
 end
 

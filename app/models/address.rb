@@ -1,7 +1,8 @@
 class Address < ActiveRecord::Base
-	validates_presence_of :main,:cep,:city,:district
-	belongs_to :city
 
-	accepts_nested_attributes_for :city
+	attr_accessor :state_id
+
+
+	validates_presence_of :main,:cep,:city_id,:state_id,:district
 
 end

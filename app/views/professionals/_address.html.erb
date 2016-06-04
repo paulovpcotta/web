@@ -19,11 +19,23 @@
     <%= a.text_field :num, label_col: "col-md-4", control_col: "col-md-2" %>
     <%= a.text_field :complement, label_col: "col-md-4", control_col: "col-md-6" %>
     <%= a.text_field :district, label_col: "col-md-4", control_col: "col-md-6" %>
-    <%= a.fields_for :city do |c| %>
-            <% if address.city.state.present? %>
-              <%= a.collection_select :city_id, City.where(:state_id => address.city.state.id), :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
-            <%end%>
-        <%= c.collection_select :state_id, State.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
-    <% end %>
+      <%= a.collection_select :city_id, city_list, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
+
+
+          <%= a.collection_select :state_id, State.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} %>
+          <script>
+            $(document).ready(function() {
+              $('#professional_address_attributes_state_id').change(function() {
+                $.ajax({
+                  url: "<%= update_city_list_path %>",
+                  data: {
+                    state_id : $('#professional_address_attributes_state_id').val()
+                  },
+                  dataType: "script"
+                });
+              });
+            });
+          </script>
+
 <% end %>
 </div>

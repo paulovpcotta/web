@@ -1,19 +1,18 @@
-<%= bootstrap_form_for(@professional, layout: :horizontal,inline_errors: false, html: {multipart: true}) do |f| %>
+<%= bootstrap_form_for(@professional, layout: :horizontal,inline_errors: true, html: {multipart: true}) do |f| %>
     <fieldset>
+
       <%= f.hidden_field :user_id %>
       <%= f.hidden_field :active %>
-      <%= render partial: 'address', locals: {address: @professional.address,f:f} %>
+      <%= render partial: 'address', locals: {city_list:@city_list ,address: @professional.address,f:f} %>
+      <%= f.fields_for :phone do |p| %>
+          <%= p.text_field :phone, data: {inputmask: "'mask': '(99)9999[9]-9999','removeMaskOnSubmit':'true'"}, control_col: "col-md-6", label_col: "col-md-4", placeholder: t('activerecord.attributes.user.phone_number') %>
+      <% end %>
       <div class="form-group">
-        <label class="col-md-3 control-label"></label>
-        <div class="col-md-8">
-          <%= f.submit 'Submit', class:"btn btn-success btn-lg" %>
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-6 text-right">
+          <%= f.submit t('.first_page_submit'), class:"btn btn-success btn-lg" %>
         </div>
       </div>
     </fieldset>
 <% end %>
-<div id="new_professional_service">
-<%= render partial: 'professional_services_form', locals: {services: @services,professional_service: @professional_service} %>
-</div>
-<div id="form_professional_services">
-  <%= render partial: 'professional_services_fields' %>
-</div>
+

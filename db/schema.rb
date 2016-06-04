@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525011925) do
+ActiveRecord::Schema.define(version: 20160522024801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20160525011925) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.binary   "photo_content"
+    t.text     "photo_content"
   end
 
   add_index "professional_profession_images", ["professional_profession_id"], name: "idx_serv_img_on_serv_ad_id", using: :btree
@@ -158,12 +158,6 @@ ActiveRecord::Schema.define(version: 20160525011925) do
   end
 
   add_index "professions", ["active"], name: "index_professions_on_active", using: :btree
-
-  create_table "profiles", force: :cascade do |t|
-    t.binary   "photo_content"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
 
   create_table "service_professional_feedbacks", force: :cascade do |t|
     t.integer  "professional_service_id"
