@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  professional_profession_id: 1
+  service_id: 1
+  service_unit_id: 1
+  price: 9.99
+  active: false
+  excluded_at: 2016-06-06 23:25:33
+
+two:
+  professional_profession_id: 1
+  service_id: 1
+  service_unit_id: 1
+  price: 9.99
+  active: false
+  excluded_at: 2016-06-06 23:25:33

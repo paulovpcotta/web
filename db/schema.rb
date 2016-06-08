@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522024801) do
-
+ActiveRecord::Schema.define(version: 20160607222948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,10 +101,21 @@ ActiveRecord::Schema.define(version: 20160522024801) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.text     "photo_content"
+    t.binary   "photo_content"
   end
 
   add_index "professional_profession_images", ["professional_profession_id"], name: "idx_serv_img_on_serv_ad_id", using: :btree
+
+  create_table "professional_profession_services", force: :cascade do |t|
+    t.integer  "professional_profession_id"
+    t.integer  "service_id"
+    t.integer  "service_unit_id"
+    t.decimal  "price"
+    t.boolean  "active"
+    t.datetime "excluded_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "professional_professions", force: :cascade do |t|
     t.integer  "professional_id"
@@ -239,6 +249,9 @@ ActiveRecord::Schema.define(version: 20160522024801) do
   add_foreign_key "professional_district_coverages", "districts"
   add_foreign_key "professional_district_coverages", "professionals"
   add_foreign_key "professional_profession_images", "professional_professions"
+  add_foreign_key "professional_profession_services", "professional_professions"
+  add_foreign_key "professional_profession_services", "service_units"
+  add_foreign_key "professional_profession_services", "services"
   add_foreign_key "professional_professions", "professionals"
   add_foreign_key "professional_professions", "professions"
   add_foreign_key "professional_services", "professionals"

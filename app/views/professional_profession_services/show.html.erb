@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Professional profession:</strong>
+  <%= @professional_profession_service.professional_profession_id %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @professional_profession_service.service_id %>
+</p>
+
+<p>
+  <strong>Service unit:</strong>
+  <%= @professional_profession_service.service_unit_id %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @professional_profession_service.price %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @professional_profession_service.active %>
+</p>
+
+<p>
+  <strong>Excluded at:</strong>
+  <%= @professional_profession_service.excluded_at %>
+</p>
+
+<%= link_to 'Edit', edit_professional_profession_service_path(@professional_profession_service) %> |
+<%= link_to 'Back', professional_profession_services_path %>

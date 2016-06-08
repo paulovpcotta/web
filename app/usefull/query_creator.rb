@@ -1,6 +1,6 @@
 class QueryCreator
   
-  def create_joins_professional_service_index(params)
+  def create_joins_professional_profession_service_index(params)
     joins = {}
     joins_with_professional = []
     join_users = {}    
@@ -22,7 +22,7 @@ class QueryCreator
     joins
   end
   
-  def create_conditions_professional_service_index(params)
+  def create_conditions_professional_profession_service_index(params)
     conditions = ['districts', 'categories'].inject({}) do |hash, field|
     if !field.blank?
       if(field == 'districts' and params.key?(:district_id) and !params[:district_id].nil?)
