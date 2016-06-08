@@ -1,4 +1,6 @@
-<table class="table-striped">
+<% if not @professional.professional_services.empty? %>
+<div class="panel panel-default">
+<table class="table">
   <thead>
   <tr>
     <th>Category</th>
@@ -11,8 +13,8 @@
   <tbody>
   <% @professional.professional_services.each do |ps| %>
       <tr>
-        <td><%= ps.service.category.id %></td>
-        <td><%= ps.service.id %></td>
+        <td><%= ps.service.category.name %></td>
+        <td><%= ps.service.name %></td>
         <td><%= ps.price %></td>
         <td><%= link_to 'Show', ps %></td>
         <td><%= link_to 'Edit' %></td>
@@ -21,4 +23,5 @@
   <% end %>
   </tbody>
 </table>
-<%= link_to "Add Service", professionals_new_professional_services_path, remote: true, class: "btn btn-primary" %>
+</div>
+<%end%>

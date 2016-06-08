@@ -6,14 +6,15 @@
         <div class="inner-box category-content">
           <h2 class="title-2 uppercase"><strong> <i class="icon-docs"></i> <%= t('.title')%></strong></h2>
           <div class="row">
-
+            <div class="col-sm-12" id="form">
+              <%= link_to "Novo Serviço", professionals_new_professional_services_path, remote: true, class: "btn btn-primary" %>
               <div id="form_professional_services">
                 <%= render 'professional_services_fields' %>
               </div>
               <div id="new_professional_service">
                 <%= render 'professional_services_form' %>
               </div>
-
+            </div>
           </div>
         </div>
       </div>
