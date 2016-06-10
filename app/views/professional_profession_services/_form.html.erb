@@ -1,0 +1,41 @@
+<%= form_for(@professional_profession_service) do |f| %>
+  <% if @professional_profession_service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@professional_profession_service.errors.count, "error") %> prohibited this professional_profession_service from being saved:</h2>
+
+      <ul>
+      <% @professional_profession_service.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :professional_profession_id %><br>
+    <%= f.number_field :professional_profession_id %>
+  </div>
+  <div class="field">
+    <%= f.label :service_id %><br>
+    <%= f.number_field :service_id %>
+  </div>
+  <div class="field">
+    <%= f.label :service_unit_id %><br>
+    <%= f.number_field :service_unit_id %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :excluded_at %><br>
+    <%= f.datetime_select :excluded_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

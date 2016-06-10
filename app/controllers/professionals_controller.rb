@@ -24,7 +24,8 @@ class ProfessionalsController < ApplicationController
     @professional.address = Address.new
     #@professional.address.city = City.new
     @professional.phone = Phone.new
-    @professional_service = ProfessionalService.new
+    @professional.professional_professions.build
+    @professional_service = ProfessionalProfessionService.new
     @services = {}
     @city_list = {}
     session[:professional] = @professional
@@ -33,7 +34,7 @@ class ProfessionalsController < ApplicationController
   # GET /professional/professional_services/new
   def new_professional_services
     @professional = Professional.new(session[:professional])
-    @professional_service = ProfessionalService.new
+    @professional_service = ProfessionalProfessionService.new
     @professional_service.service = Service.new
     @services = {}
     respond_to do |format|
@@ -58,11 +59,12 @@ class ProfessionalsController < ApplicationController
 
   # POST /professional_services
   def create_professional_services
-    @professional_service = ProfessionalService.new(professional_service_params)
+    @professional_service = ProfessionalProfessionService.new(professional_service_params)
     @professional_service.service = Service.find professional_service_params[:service_id]
     @professional = Professional.new(session[:professional])
-    @professional.professional_services.push(@professional_service)
-    session[:professional] = @professional
+    @professional_service.professional = @professional
+    @professional_service.save
+    @professional_service_list = ProfessionalProfessionService.where(:professional_id => @professional.id)
     respond_to do |format|
       format.js
     end
@@ -80,7 +82,8 @@ class ProfessionalsController < ApplicationController
   def create
     @professional = Professional.new(professional_params)
     if @professional.save
-      @professional_service = ProfessionalService.new
+      @professional_service = ProfessionalProfessionService.new
+      @professional_service_list = {}
       render :new_part2
     else
       @city_list = {}
@@ -137,7 +140,7 @@ class ProfessionalsController < ApplicationController
     end
     # Only allow a trusted parameter "white list" through.
      def professional_service_params
-       params.require(:professional_service).permit!
+       params.require(:professional_profession_service).permit!
      end
 
 end

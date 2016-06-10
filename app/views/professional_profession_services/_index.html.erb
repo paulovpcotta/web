@@ -1,0 +1,112 @@
+<div class="col-sm-9 page-content col-thin-left">
+
+                  <div class="category-list">
+                      <div class="tab-box ">
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs add-tabs" role="tablist">
+                              <li class="active">
+                                  <a href="#allAds" role="tab" data-toggle="tab"><%= t('.all_service') %>
+                                      <span class="badge"><%= @professional_profession_services.size %></span></a>
+                              </li>
+
+                          </ul>
+                          
+                          <div class="tab-filter" style="margin-top:5px; margin-right:5px;">
+						      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						        <%= t('.order_by') %> <span class="caret"></span>
+						      </button>						      
+							      <ul class="dropdown-menu" role="menu">
+							        <li><%= link_to "#{t('.low_price')}",
+							        get_url_list_service(["category", "district", "min_price", "max_price", "bol_company"])+ "&by_lower_price=#{true}", remote: true %></li>
+							        <li><%= link_to "#{t('.high_price')}",
+							        get_url_list_service(["category", "district", "min_price", "max_price", "bol_company"])+ "&by_lower_price=#{false}", remote: true %></li>
+							      </ul>
+							      
+						 </div>                          
+                          
+                      </div>
+                      <!--/.tab-box-->
+
+                      <div class="listing-filter">
+                          <div class="pull-left col-xs-6">
+                              <div class="breadcrumb-list"><a href="list_service" class="current"> <span><%= t('.all_service') %></span></a> in
+                                  New York
+                                  <a href="#selectRegion" id="dropdownMenu1" data-toggle="modal">
+                                      <span class="caret"></span> </a>
+                              </div>
+                          </div>
+                          <div class="pull-right col-xs-6 text-right listing-view-action">
+                              <span class="list-view active"><i class="  icon-th"></i></span>
+                              <span class="grid-view "><i class=" icon-th-large "></i></span></div>
+                          <div style="clear:both"></div>
+                      </div>
+                      <!--/.listing-filter-->
+                      <div class="adds-wrapper">
+                          <% @professional_profession_services.each do |professional_profession_service| %>
+                            <div class="item-list">
+                                <div class="col-sm-2 no-padding photobox">
+                                    <div class="add-image">
+                                        
+                                        <%= link_to professional_profession_service do %>
+                                          <% if (!professional_profession_service.profile.nil?) %>
+                                            <%= image_tag (professional_profession_service.profile.avatar.url(:thumb)), class: 'thumbnail no-margin' %>                                             
+                                            <% end %>
+                                          <% end %>    
+                                      </div>
+                                  </div>
+                                  <!--/.photobox-->
+                                  <div class="col-sm-7 add-desc-box">
+                                      <div class="add-details">
+                                          <h5 class="add-title"> <%= professional_profession_service.service.name%> </h5>
+                                          <span class="info-row">
+                                              <span class="add-type business-ads tooltipHere" data-toggle="tooltip" data-placement="right"
+                                                    title="Profissional Autônomo"><i class="fa icon-user-2"></i> </span>
+                                              <span class="date"><i class=" icon-person"> </i> <%= User.find(professional_profession_service.user).first_name %> <%= User.find(professional_profession_service.user.id).last_name %> </span>
+                                              - <span class="item-location"><i class="fa fa-map-marker"></i> <%= professional_profession_service.professional.address.city.state.name %> </span>
+                                          </span>
+                                          <span class="info-row">
+                                              <i class=" icon-star" style="color:gold"> </i>
+                                              <i class=" icon-star" style="color:gold"> </i>
+                                              <i class=" icon-star" style="color:gold"> </i>
+                                              <i class=" icon-star-empty"> </i>
+                                          </span>
+                                      </div>
+                                  </div>
+                                  <!--/.add-desc-box-->
+                                  <div class="col-sm-3 text-right  price-box">
+                                      A partir de
+                                      <h2 class="item-price"><%= number_to_currency(professional_profession_service.price, unit: "R$",
+                                            separator: ",", delimiter: ".") %> </h2>
+                                      <a class="btn btn-danger  btn-sm make-favorite">
+                                          <i class="fa fa-certificate"></i>
+                                          <span>Urgent</span> </a>
+                                      <a class="btn btn-default  btn-sm make-favorite"> <i class="fa fa-heart"></i>
+                                          <span>Save</span>
+                                      </a>
+                                  </div>
+                                  <!--/.add-desc-box-->
+                              </div>
+                            <% end %>
+                            <!--/.item-list-->
+
+
+                        </div> <!--/.adds-wrapper-->
+
+                        <div class="tab-box  save-search-bar text-center">
+                            <a href=""> <i class=" icon-star-empty"></i> Save Search </a></div>
+                    </div>
+                    <div class="pagination-bar text-center">
+                    	<%= paginate @professional_profession_services %>                        
+                    </div>
+                    <!--/.pagination-bar -->
+
+                    <div class="post-promo text-center">
+                        <h2> Você é um Kabra Bom ? </h2>
+                        <h5>Cadastre agora o seu serviço sem custo algum. É mais fácil do que imagina!</h5>
+                        <a href="post-ads.html" class="btn btn-lg btn-border btn-post btn-danger">Cadastre Agora </a></div>
+                    <!--/.post-promo-->
+                    
+
+</div>
+<script src="/bootstrap/js/bootstrap.min.js"></script>

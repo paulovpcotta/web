@@ -6,7 +6,7 @@
         <p class="sub animateme fittext3 animated fadeIn"> <%= t('.subTitle')%> </p>
 
         <div class="row search-row animated fadeInUp">
-        	<%= form_tag("list_professional_service", method: "get") do %>
+        	<%= form_tag("list_service", method: "get") do %>
 			  <div class="col-lg-4 col-sm-4 search-col relative locationicon">
 	            <i class="icon-location-2 icon-append"></i>
 	            <input type="text" name="city_name" id="autocomplete-ajax"  class="form-control locinput input-rel searchtag-input has-icon" placeholder="<%=t('.searchCityCep') %>" value="">

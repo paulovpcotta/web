@@ -91,7 +91,7 @@ pt:
       button_change: 'Enviar'
       new_password: 'Nova Senha'
       confirm_password: 'Confirmar Senha'
-  professional_services:
+  professional_profession_services:
     index:
       allCategory: 'Todas as Categorias'
       allLocation: 'Todas as Localizações'

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :professional_professions
   resources :service_professional_feedbacks
   resources :professionals
-  resources :professional_services
+  resources :professional_profession_services
   resources :services
   resources :categories
   get 'message/index'
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   get 'servicesByCategory/retrieveByCategory' => "services#retrieveByCategory", :as => 'remote_select' 
 
-  get "list_professional_service" => "professional_services#index"
+  get "list_service" => "professional_profession_services#index"
 
   get "new_profile" => "profiles#new"
   

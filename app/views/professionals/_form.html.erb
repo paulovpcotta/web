@@ -7,6 +7,9 @@
       <%= f.fields_for :phone do |p| %>
           <%= p.text_field :phone, data: {inputmask: "'mask': '(99)9999[9]-9999','removeMaskOnSubmit':'true'"}, control_col: "col-md-6", label_col: "col-md-4", placeholder: t('activerecord.attributes.user.phone_number') %>
       <% end %>
+      <%= f.fields_for :professional_professions do |prof| %>
+          <%= prof.collection_select  :profession_id, Profession.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
+      <% end %>
       <div class="form-group">
         <label class="col-md-4 control-label"></label>
         <div class="col-md-6 text-right">

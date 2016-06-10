@@ -1,4 +1,4 @@
-<% if not @professional.professional_services.empty? %>
+<% if not @professional_service_list.empty? %>
 <div class="panel panel-default">
 <table class="table">
   <thead>
@@ -11,7 +11,7 @@
   </thead>
 
   <tbody>
-  <% @professional.professional_services.each do |ps| %>
+  <% @professional_service_list.each do |ps| %>
       <tr>
         <td><%= ps.service.category.name %></td>
         <td><%= ps.service.name %></td>
