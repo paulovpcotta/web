@@ -241,9 +241,48 @@
                   </aside>
               </div>
               <!--/.page-side-bar-->
-              <div id="div_professional_profession_services">
-              	<%= render partial: 'index' %>
+              <div class="col-sm-9 page-content col-thin-left">
+					<div class="category-list">
+                      <div class="tab-box ">
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs add-tabs" role="tablist">
+                              <li class="active">
+                                  <a href="#allAds" role="tab" data-toggle="tab"><%= t('.all_service') %>
+                                      <span class="badge"><%= @professional_profession_services.size %></span></a>
+                              </li>
+
+                          </ul>
+                          
+                          <div class="tab-filter" style="margin-top:5px; margin-right:5px;">
+						      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						        <%= t('.order_by') %> <span class="caret"></span>
+						      </button>						      
+							      <ul class="dropdown-menu" role="menu">
+							        <li><%= link_to "#{t('.low_price')}",
+							        get_url_list_service(["category", "district", "min_price", "max_price", "bol_company"])+ "&by_lower_price=#{true}", remote: true %></li>
+							        <li><%= link_to "#{t('.high_price')}",
+							        get_url_list_service(["category", "district", "min_price", "max_price", "bol_company"])+ "&by_lower_price=#{false}", remote: true %></li>
+							      </ul>
+							      
+						 </div>                          
+                          
+                      </div>
+                      <!--/.tab-box-->
+						<div id="div_professional_profession_services">
+			              	<%= render partial: 'index' %>
+			            </div>	
+                  			    
+                        		              	
+	              
+              
+	              <div class="post-promo text-center">
+	                        <h2> Você é um Kabra Bom ? </h2>
+	                        <h5>Cadastre agora o seu serviço sem custo algum. É mais fácil do que imagina!</h5>
+	                        <a href="post-ads.html" class="btn btn-lg btn-border btn-post btn-danger">Cadastre Agora </a>
+	              </div>
               </div>
+              <!--/.post-promo-->
               
                 <!--/.page-content-->
 

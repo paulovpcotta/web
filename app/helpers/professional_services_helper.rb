@@ -5,7 +5,7 @@ parametros_clonado = {}
 
   public
   
-  def count_service_per_category(category_id)
+  def count_service_per_categoryi(category_id)
     clause_price = get_clause_price
     
     q = QueryCreator.new()
@@ -24,7 +24,7 @@ parametros_clonado = {}
       .where(conditions).where(clause_price).size 
   end
   
-  def count_service_per_district(district_id)
+  def count_service_per_districti(district_id)
     clause_price = get_clause_price
     
     q = QueryCreator.new()
@@ -50,7 +50,7 @@ parametros_clonado = {}
       .where(conditions).where(clause_price).size
   end
   
-  def count_service_per_kind_of_person(bol_company = nil)
+  def count_service_per_kind_of_personi(bol_company = nil)
     clause_price = get_clause_price
     
     q = QueryCreator.new()
