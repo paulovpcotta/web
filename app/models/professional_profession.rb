@@ -1,5 +1,5 @@
 class ProfessionalProfession < ActiveRecord::Base
 	belongs_to :professional
-	# has_one :profession
+	belongs_to :profession
 	has_many :professional_profession_images, foreign_key: :professional_profession_id
 end

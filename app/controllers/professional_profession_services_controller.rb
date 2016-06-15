@@ -128,7 +128,7 @@ class ProfessionalProfessionServicesController < ApplicationController
         order_by_price
       end
       
-      @professional_profession_services = Kaminari.paginate_array(@professional_profession_services).page(params[:page]).per(2)
+      @professional_profession_services = Kaminari.paginate_array(@professional_profession_services).page(params[:page]).per(25)
       
     end
     

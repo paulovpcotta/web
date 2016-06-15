@@ -8,6 +8,8 @@ class ProfessionalProfessionService < ActiveRecord::Base
   has_one :professional, through: :professional_profession
   has_one :user, through: :professional
   has_one :profile, through: :user
+  
+  has_many :service_professional_feedback
 
   accepts_nested_attributes_for :service
 

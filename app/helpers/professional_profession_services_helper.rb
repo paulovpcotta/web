@@ -3,7 +3,21 @@ module ProfessionalProfessionServicesHelper
   require_relative '../usefull/query_creator.rb'
   parametros_clonado = {}
   
-    public
+  
+    def display_star_feedback(level, type_info, professional_profession_service)
+      feedbacks = professional_profession_service.service_professional_feedback
+      average_stars = get_average_stars(feedbacks)
+      if type_info == "star"        
+        choose_star_style(level, average_stars)
+      else
+        choose_color_star(level, average_stars)          
+      end
+    end 
+    
+    def get_name_user(user)
+      user = User.find(user)
+      user.first_name+" "+user.last_name              
+    end
     
     def count_service_per_category(category_id)
       clause_price = get_clause_price
@@ -105,6 +119,31 @@ module ProfessionalProfessionServicesHelper
        url += "#{'&by_lower_price='+@by_lower_price.to_s unless @by_lower_price.nil?}"
      end
      url
+   end
+   
+   private
+   def choose_star_style(level, average_stars)
+     if average_stars < level
+          "icon-star-empty"
+        else
+          "icon-star"
+        end
+   end
+   
+   def choose_color_star(level, average_stars)
+        if average_stars < level
+          "gray"          
+        else
+          "gold"                  
+        end
+   end
+   
+   def get_average_stars(feedbacks)
+     sum_stars = 0
+     feedbacks.each do |feedback|
+       sum_stars += feedback.quantity_stars
+     end
+     (!feedbacks.empty? and sum_stars > 0) ? (sum_stars.to_f/feedbacks.size).round : 0     
    end
   
 end
