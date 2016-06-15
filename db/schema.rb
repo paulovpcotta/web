@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607222948) do
+ActiveRecord::Schema.define(version: 20160614022919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,12 +181,12 @@ ActiveRecord::Schema.define(version: 20160607222948) do
   end
 
   create_table "service_professional_feedbacks", force: :cascade do |t|
-    t.integer  "professional_service_id"
+    t.integer  "professional_profession_service_id"
     t.integer  "quantity_stars"
     t.integer  "user_id"
     t.string   "feedback"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "service_units", force: :cascade do |t|
@@ -261,7 +261,7 @@ ActiveRecord::Schema.define(version: 20160607222948) do
   add_foreign_key "professionals", "phones"
   add_foreign_key "professionals", "users"
   add_foreign_key "profiles", "users"
-  add_foreign_key "service_professional_feedbacks", "professional_services"
+  add_foreign_key "service_professional_feedbacks", "professional_profession_services"
   add_foreign_key "service_professional_feedbacks", "users"
   add_foreign_key "services", "categories"
   add_foreign_key "users", "phones"

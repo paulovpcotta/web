@@ -1,9 +1,9 @@
 <div class="listing-filter">
                           <div class="pull-left col-xs-6">
-                              <div class="breadcrumb-list"><a href="list_service" class="current"> <span><%= t('.all_service') %></span></a> in
-                                  New York
+                              <div class="breadcrumb-list"><a href="list_service" class="current"> <span><%= t('.all_service') %></span></a>
+                                  <!--New York
                                   <a href="#selectRegion" id="dropdownMenu1" data-toggle="modal">
-                                      <span class="caret"></span> </a>
+                                      <span class="caret"></span> </a>-->
                               </div>
                           </div>
                           <div class="pull-right col-xs-6 text-right listing-view-action">
@@ -28,17 +28,18 @@
                                   <!--/.photobox-->
                                   <div class="col-sm-7 add-desc-box">
                                       <div class="add-details">
-                                          <h5 class="add-title"> <%= professional_profession_service.service.name%> </h5>
+                                          <h5 class="add-title"> <%= get_name_user(professional_profession_service.user) %> </h5>
                                           <span class="info-row">
                                               <span class="add-type business-ads tooltipHere" data-toggle="tooltip" data-placement="right"
                                                     title="Profissional Autônomo"><i class="fa icon-user-2"></i> </span>
-                                              <span class="date"><i class=" icon-person"> </i> <%= User.find(professional_profession_service.user).first_name %> <%= User.find(professional_profession_service.user.id).last_name %> </span>
+                                              <span class="date"><i class=" icon-person"> </i> <%= professional_profession_service.professional_profession.profession.name %></span>
                                           </span>
                                           <span class="info-row">
-                                              <i class=" icon-star" style="color:gold"> </i>
-                                              <i class=" icon-star" style="color:gold"> </i>
-                                              <i class=" icon-star" style="color:gold"> </i>
-                                              <i class=" icon-star-empty"> </i>
+                                              <i class="<%=display_star_feedback(1, "star", professional_profession_service)%>" style="color:<%=display_star_feedback(1, "color_star", professional_profession_service)%>"> </i>
+                                              <i class="<%=display_star_feedback(2, "star", professional_profession_service)%>" style="color:<%=display_star_feedback(2, "color_star", professional_profession_service)%>"> </i>
+                                              <i class="<%=display_star_feedback(3, "star", professional_profession_service)%>" style="color:<%=display_star_feedback(3, "color_star", professional_profession_service)%>"> </i>
+                                              <i class="<%=display_star_feedback(4, "star", professional_profession_service)%>" style="color:<%=display_star_feedback(4, "color_star", professional_profession_service)%>"> </i>
+                                              <i class="<%=display_star_feedback(5, "star", professional_profession_service)%>" style="color:<%=display_star_feedback(5, "color_star", professional_profession_service)%>"> </i>
                                           </span>
                                       </div>
                                   </div>
@@ -66,10 +67,7 @@
                             <a href=""> <i class=" icon-star-empty"></i> Save Search </a></div>
                     </div>	
                   
-                   <!--/.pagination-bar -->
-                    <div class="pagination-bar text-center">
-                    	<%= paginate @professional_profession_services %>                        
-                    </div>
+                   
                     
                     
                     
