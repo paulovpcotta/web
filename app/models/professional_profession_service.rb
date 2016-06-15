@@ -2,16 +2,17 @@ class ProfessionalProfessionService < ActiveRecord::Base
   belongs_to :service_unit
   belongs_to :service
 
-  has_one :service_unit
   belongs_to :professional_profession
 
   has_one :professional, through: :professional_profession
   has_one :user, through: :professional
   has_one :profile, through: :user
 
-  accepts_nested_attributes_for :service
+  #accepts_nested_attributes_for :service
 
-  validates_presence_of :active,:price,  :created_at, :updated_at
+  attr_accessor :category_id
+
+  validates_presence_of :active,:price
 
   scope :active, -> {where ("excluded_at IS NULL and professional_profession_services.active = TRUE")}
   

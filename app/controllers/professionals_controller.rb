@@ -35,7 +35,9 @@ class ProfessionalsController < ApplicationController
   def new_professional_services
     @professional = Professional.new(session[:professional])
     @professional_service = ProfessionalProfessionService.new
+    @professional_service.professional_profession_id = params[:professional_profession_id]
     @professional_service.service = Service.new
+    @professional_service.active = true
     @services = {}
     respond_to do |format|
       format.js
@@ -60,13 +62,15 @@ class ProfessionalsController < ApplicationController
   # POST /professional_services
   def create_professional_services
     @professional_service = ProfessionalProfessionService.new(professional_service_params)
-    @professional_service.service = Service.find professional_service_params[:service_id]
-    @professional = Professional.new(session[:professional])
-    @professional_service.professional = @professional
-    @professional_service.save
-    @professional_service_list = ProfessionalProfessionService.where(:professional_id => @professional.id)
-    respond_to do |format|
-      format.js
+    if @professional_service.save
+       @professional_service_list = ProfessionalProfessionService.where(:professional_profession_id => @professional_service.professional_profession_id)
+      respond_to do |format|
+        format.js
+      end
+    else
+      @professional_service.errors
+      @professional_service_list = {}
+      render :new_part2
     end
   end
   # GET /professional_services/1/edit
@@ -83,6 +87,9 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.new(professional_params)
     if @professional.save
       @professional_service = ProfessionalProfessionService.new
+      @professional_service.service = Service.new
+      @professional_service.active = true
+      @professional_service.professional_profession_id = @professional.professional_professions.first.id
       @professional_service_list = {}
       render :new_part2
     else

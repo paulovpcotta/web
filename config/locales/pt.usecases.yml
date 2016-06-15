@@ -123,6 +123,9 @@ pt:
       helpDescription: Inclua aqui o maior numero de detalhes do serviço a ser executado
       realphotos: Adicione até 5 fotos. Inclua fotos reais do seu trabalho.
       first_page_submit: Avançar
+    new_part2:
+      new_service: Novo Serviço
+      title: Cadastre aqui seus serviços
   activerecord:
     models:
       profession:
@@ -176,7 +179,7 @@ pt:
       phone:
         ddd: Ddd
         phone: Telefone
-      professional_service:
+      professional_profession_service:
         category_id: Categoria
         title: Título
         description: Descrição
