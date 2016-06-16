@@ -75,7 +75,21 @@ class ProfessionalsController < ApplicationController
   end
   # GET /professional_services/1/edit
   def edit_professional_services
-    @city_list = {}
+    @professional = Professional.new(session[:professional])
+    @professional_service = ProfessionalProfessionService.find params[:id]
+    @professional_service.category_id = @professional_service.service.category_id
+    @services = Service.where(:category_id => @professional_service.category_id)
+    respond_to do |format|
+      format.js
+    end
+  end
+  # GET /professional_services/1/edit
+  def delete_professional_services
+    @professional_service = ProfessionalProfessionService.find params[:id]
+    @professional_service.delete
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /professionals/1/edit
@@ -91,6 +105,7 @@ class ProfessionalsController < ApplicationController
       @professional_service.active = true
       @professional_service.professional_profession_id = @professional.professional_professions.first.id
       @professional_service_list = {}
+      @services = {}
       render :new_part2
     else
       @city_list = {}
