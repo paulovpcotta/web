@@ -1,5 +1,3 @@
-
-
 class ProfessionalsController < ApplicationController
 
   require 'correios-cep'
@@ -45,15 +43,16 @@ class ProfessionalsController < ApplicationController
   end
 
   def update_services
-    serviceList  = Service.where(:category_id => params[:category_id])
-    @services = serviceList.map{|a| [a.name, a.id]}.insert(0, "Selecione")
+    serviceList = Service.where(:category_id => params[:category_id])
+    @services = serviceList.map { |a| [a.name, a.id] }.insert(0, "Selecione")
     respond_to do |format|
       format.js
     end
   end
+
   def update_city_list
     cityList = City.where(:state_id => params[:state_id])
-    @city_list = cityList.map{|a| [a.name, a.id]}.insert(0, "Selecione")
+    @city_list = cityList.map { |a| [a.name, a.id] }.insert(0, "Selecione")
     respond_to do |format|
       format.js
     end
@@ -61,18 +60,33 @@ class ProfessionalsController < ApplicationController
 
   # POST /professional_services
   def create_professional_services
-    @professional_service = ProfessionalProfessionService.new(professional_service_params)
-    if @professional_service.save
-       @professional_service_list = ProfessionalProfessionService.where(:professional_profession_id => @professional_service.professional_profession_id)
-      respond_to do |format|
-        format.js
+    if (professional_service_params[:id].empty?)
+      @professional_service = ProfessionalProfessionService.new(professional_service_params)
+      if @professional_service.save
+        @professional_service_list = ProfessionalProfessionService.where(:professional_profession_id => @professional_service.professional_profession_id)
+        respond_to do |format|
+          format.js
+        end
+      else
+        @professional_service.errors
+        @professional_service_list = {}
+        render :new_part2
       end
     else
-      @professional_service.errors
-      @professional_service_list = {}
-      render :new_part2
+      @professional_service = ProfessionalProfessionService.find professional_service_params[:id]
+      if @professional_service.update(professional_service_params)
+        @professional_service_list = ProfessionalProfessionService.where(:professional_profession_id => @professional_service.professional_profession_id)
+        respond_to do |format|
+          format.js
+        end
+      else
+        @professional_service.errors
+        @professional_service_list = {}
+        render :new_part2
+      end
     end
   end
+
   # GET /professional_services/1/edit
   def edit_professional_services
     @professional = Professional.new(session[:professional])
@@ -83,10 +97,12 @@ class ProfessionalsController < ApplicationController
       format.js
     end
   end
+
   # GET /professional_services/1/edit
   def delete_professional_services
     @professional_service = ProfessionalProfessionService.find params[:id]
     @professional_service.delete
+    @professional_service_list = ProfessionalProfessionService.where(:professional_profession_id => @professional_service.professional_profession_id)
     respond_to do |format|
       format.js
     end
@@ -109,7 +125,7 @@ class ProfessionalsController < ApplicationController
       render :new_part2
     else
       @city_list = {}
-      if(@professional.address.state_id.present?)
+      if (@professional.address.state_id.present?)
         @city_list = City.where(:state_id => @professional.address.state_id)
       end
       render :new
@@ -121,12 +137,12 @@ class ProfessionalsController < ApplicationController
     addressFound = Correios::CEP::AddressFinder.get(params[:id])
 
     @address = Address.new
-    @address.main =  addressFound[:address]
-    @address.district =  addressFound[:neighborhood]
+    @address.main = addressFound[:address]
+    @address.district = addressFound[:neighborhood]
     city = City.find_by_name addressFound[:city]
-    @address.city_id =  city.id
-    @address.state_id =  city.state_id
-    @address.cep  = params[:id]
+    @address.city_id = city.id
+    @address.state_id = city.state_id
+    @address.cep = params[:id]
     @city_list = City.where(:state_id => city.state_id)
     @professional = Professional.new
     @professional.address = @address
@@ -138,7 +154,7 @@ class ProfessionalsController < ApplicationController
   # PATCH/PUT /professionals/1
   def update
     if @professional.update(professional_params)
-      redirect_to @professional, notice: t('helpers.messages.update' , model:t('activerecord.models.professional.one'))
+      redirect_to @professional, notice: t('helpers.messages.update', model: t('activerecord.models.professional.one'))
     else
       render :edit
     end
@@ -147,23 +163,24 @@ class ProfessionalsController < ApplicationController
   # DELETE /professionals/1
   def destroy
     @professional.destroy
-    redirect_to professionals_url, notice: t('helpers.messages.delete' , model:t('activerecord.models.professional.one'))
+    redirect_to professionals_url, notice: t('helpers.messages.delete', model: t('activerecord.models.professional.one'))
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_professional
-      @professional = Professional.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_professional
+    @professional = Professional.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def professional_params
-      params.require(:professional).permit!
-    end
-    # Only allow a trusted parameter "white list" through.
-     def professional_service_params
-       params.require(:professional_profession_service).permit!
-     end
+  # Only allow a trusted parameter "white list" through.
+  def professional_params
+    params.require(:professional).permit!
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def professional_service_params
+    params.require(:professional_profession_service).permit!
+  end
 
 end
 

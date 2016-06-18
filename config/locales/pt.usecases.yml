@@ -126,6 +126,9 @@ pt:
     new_part2:
       new_service: Novo Serviço
       title: Cadastre aqui seus serviços
+      submit: Salvar
+      cancel: Cancelar
+      new_service: Cadastro de Serviço
   activerecord:
     models:
       profession:

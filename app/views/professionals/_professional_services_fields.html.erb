@@ -19,8 +19,11 @@
         <td><%= ps.service.name %></td>
         <td><%= ps.price %></td>
         <td><%= ps.service_unit.name %></td>
-        <td><%= link_to 'Edit', professionals_edit_professional_services_path(:id => @professional_service.id), remote: true %></td>
-        <td><%= link_to ps, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <td><%= link_to  professionals_edit_professional_services_path(:id => @professional_service.id), remote: true  do%>
+              <i class="icon-pencil"></i>
+              <%end%>
+        </td>
+        <td><%= link_to professionals_delete_professional_services_path(:id => @professional_service.id), remote: true, method: :delete do %>
               <i class="icon-trash-2"></i>
             <%end%>
         </td>

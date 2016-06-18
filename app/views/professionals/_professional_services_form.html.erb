@@ -1,13 +1,14 @@
 <div class="modal fade" id="professionalServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= bootstrap_form_for(@professional_service,:url => url_for(:controller => 'professionals', :action => 'create_professional_services') , layout: :horizontal,:format => :js,:remote =>true , inline_errors: false) do |form| %>
+      <%= bootstrap_form_for(@professional_service,:url => url_for(:controller => 'professionals', :action => 'create_professional_services') , layout: :horizontal,:format => :js,:method =>'post',:remote =>true , inline_errors: false) do |form| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title-site text-center">Modal title</h4>
+        <h4 class="modal-title-site text-center"><%= t('professionals.new_part2.new_service')%></h4>
       </div>
       <div class="modal-body">
         <%= form.hidden_field :professional_profession_id %>
+        <%= form.hidden_field :id %>
         <%= form.hidden_field :active %>
             <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
             <%= form.collection_select  :category_id, Category.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
@@ -25,13 +26,13 @@
               });
             </script>
         <%= form.collection_select :service_id, @services, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"} , {:class=>'form-control'}%>
-        <%= form.text_field :price , label_col: "col-md-4", control_col: "col-md-6" %>
+        <%= form.text_field :price, data: {inputmask: "'mask': '[9999],99','removeMaskOnSubmit':'true'"}, label_col: "col-md-4", control_col: "col-md-6" %>
         <%= form.collection_select :service_unit_id, ServiceUnit.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= form.primary 'Submit' %>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('professionals.new_part2.cancel')%></button>
+        <%= form.primary t('professionals.new_part2.submit') %>
       </div>
       <% end %>
     </div><!-- /.modal-content -->
