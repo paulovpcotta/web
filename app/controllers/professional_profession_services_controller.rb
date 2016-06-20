@@ -95,7 +95,7 @@ class ProfessionalProfessionServicesController < ApplicationController
       end
       
       if(!@service_name.nil? and !@service_name.blank? )
-        clause_search_bar += " lower(services.name) like lower(\'#{@service_name}%\')"  
+        clause_search_bar += " (lower(services.name) like lower(\'#{@service_name}%\') or lower(professions.name) like lower(\'#{@service_name}%\'))"  
       end       
       
       clause_search_bar
