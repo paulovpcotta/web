@@ -14,7 +14,7 @@ class ProfessionalProfessionService < ActiveRecord::Base
 
   attr_accessor :category_id
 
-  validates_presence_of :active,:price
+  validates_presence_of :active,:price,:service_unit,:service
 
   scope :active, -> {where ("excluded_at IS NULL and professional_profession_services.active = TRUE")}
   

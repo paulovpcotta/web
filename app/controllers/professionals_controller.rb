@@ -60,6 +60,7 @@ class ProfessionalsController < ApplicationController
 
   # POST /professional_services
   def create_professional_services
+    professional_service_params[:price].gsub!(',', '.')
     if (professional_service_params[:id].empty?)
       @professional_service = ProfessionalProfessionService.new(professional_service_params)
       if @professional_service.save
@@ -68,7 +69,6 @@ class ProfessionalsController < ApplicationController
           format.js
         end
       else
-        @professional_service.errors
         @professional_service_list = {}
         render :new_part2
       end

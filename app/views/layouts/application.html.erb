@@ -144,6 +144,8 @@
   <script src="/js/jquery.matchHeight-min.js"></script>
 
   <!-- include jquery list shorting plugin plugin  -->
+  <script src="/js/jquery.inputmask.bundle.js"></script>
+
   <script src="/js/hideMaxListItem.js"></script>
 
   <!-- include jquery.fs plugin for custom scroller and selecter  -->
@@ -152,5 +154,10 @@
   <!-- include custom script for site  -->
   <script src="/js/script.js"></script>
   <!-- /.wrapper -->
+  <script>
+    $(document).ready(function(){
+      $(":input").inputmask();
+    });
+  </script>
   </body>
 </html>

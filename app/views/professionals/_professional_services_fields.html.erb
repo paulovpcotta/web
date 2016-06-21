@@ -17,7 +17,7 @@
       <tr>
         <td><%= ps.service.category.name %></td>
         <td><%= ps.service.name %></td>
-        <td><%= ps.price %></td>
+        <td><%= number_to_currency(ps.price, unit: "R$", separator: ",", delimiter: ".") %></td>
         <td><%= ps.service_unit.name %></td>
         <td><%= link_to  professionals_edit_professional_services_path(:id => @professional_service.id), remote: true  do%>
               <i class="icon-pencil"></i>
@@ -36,6 +36,9 @@
       <label class="col-md-4 control-label"></label>
       <div class="col-md-8 text-right">
         <%= link_to t('professionals.new_part2.new_service'), professionals_new_professional_services_path(:professional_profession_id => @professional_service.professional_profession_id), remote: true, class: "btn btn-primary" %>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#professionalServiceModal">
+          Launch demo modal
+        </button>
       </div>
     </div>
   </div>

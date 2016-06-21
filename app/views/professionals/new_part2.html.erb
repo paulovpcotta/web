@@ -12,7 +12,7 @@
                 <%= render 'professional_services_fields' %>
               </div>
               <div id="new_professional_service">
-                <%= render 'professional_services_form' %>
+                <%= render 'professional_services_form' , locals: {services: @services}  %>
               </div>
 
 
