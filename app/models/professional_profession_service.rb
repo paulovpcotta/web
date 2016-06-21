@@ -5,6 +5,7 @@ class ProfessionalProfessionService < ActiveRecord::Base
   belongs_to :professional_profession
 
   has_one :professional, through: :professional_profession
+  has_many :profession, through: :professional_profession
   has_one :user, through: :professional
   has_one :profile, through: :user
   
