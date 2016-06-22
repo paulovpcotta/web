@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :feedback_types
+  resources :source_feedbacks
+  resources :feedbacks
   resources :profiles
   resources :professional_professions
-  resources :service_professional_feedbacks
   resources :professionals
   resources :professional_profession_services
   resources :services

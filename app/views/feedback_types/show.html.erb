@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @feedback_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @feedback_type.description %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @feedback_type.active %>
+</p>
+
+<%= link_to 'Edit', edit_feedback_type_path(@feedback_type) %> |
+<%= link_to 'Back', feedback_types_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614022919) do
+ActiveRecord::Schema.define(version: 20160622010753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,24 @@ ActiveRecord::Schema.define(version: 20160614022919) do
   add_index "districts", ["active"], name: "index_districts_on_active", using: :btree
   add_index "districts", ["city_id"], name: "index_districts_on_city_id", using: :btree
 
+  create_table "feedback_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "active"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.integer  "quantity_stars"
+    t.integer  "source_feedback_id"
+    t.integer  "user_id"
+    t.string   "user_opnion"
+    t.boolean  "active"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "phones", force: :cascade do |t|
     t.string   "phone"
     t.boolean  "active"
@@ -101,7 +119,7 @@ ActiveRecord::Schema.define(version: 20160614022919) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.text     "photo_content"
+    t.binary   "photo_content"
   end
 
   add_index "professional_profession_images", ["professional_profession_id"], name: "idx_serv_img_on_serv_ad_id", using: :btree
@@ -180,15 +198,6 @@ ActiveRecord::Schema.define(version: 20160614022919) do
     t.integer  "user_id"
   end
 
-  create_table "service_professional_feedbacks", force: :cascade do |t|
-    t.integer  "professional_profession_service_id"
-    t.integer  "quantity_stars"
-    t.integer  "user_id"
-    t.string   "feedback"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-  end
-
   create_table "service_units", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -208,6 +217,15 @@ ActiveRecord::Schema.define(version: 20160614022919) do
   add_index "services", ["active"], name: "index_services_on_active", using: :btree
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
   add_index "services", ["created_at"], name: "index_services_on_created_at", using: :btree
+
+  create_table "source_feedbacks", force: :cascade do |t|
+    t.integer  "professional_id"
+    t.integer  "professional_profession_id"
+    t.integer  "professional_profession_service_id"
+    t.integer  "feedback_type_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   create_table "states", force: :cascade do |t|
     t.string   "sign"
@@ -244,6 +262,8 @@ ActiveRecord::Schema.define(version: 20160614022919) do
   add_foreign_key "addresses", "cities"
   add_foreign_key "cities", "states"
   add_foreign_key "districts", "cities"
+  add_foreign_key "feedbacks", "source_feedbacks"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "professional_city_coverages", "cities"
   add_foreign_key "professional_city_coverages", "professionals"
   add_foreign_key "professional_district_coverages", "districts"
@@ -261,8 +281,10 @@ ActiveRecord::Schema.define(version: 20160614022919) do
   add_foreign_key "professionals", "phones"
   add_foreign_key "professionals", "users"
   add_foreign_key "profiles", "users"
-  add_foreign_key "service_professional_feedbacks", "professional_profession_services"
-  add_foreign_key "service_professional_feedbacks", "users"
   add_foreign_key "services", "categories"
+  add_foreign_key "source_feedbacks", "feedback_types"
+  add_foreign_key "source_feedbacks", "professional_profession_services"
+  add_foreign_key "source_feedbacks", "professional_professions"
+  add_foreign_key "source_feedbacks", "professionals"
   add_foreign_key "users", "phones"
 end
