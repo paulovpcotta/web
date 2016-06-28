@@ -1,0 +1,33 @@
+<%= form_for(@source_feedback) do |f| %>
+  <% if @source_feedback.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@source_feedback.errors.count, "error") %> prohibited this source_feedback from being saved:</h2>
+
+      <ul>
+      <% @source_feedback.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :professional_id %><br>
+    <%= f.text_field :professional_id %>
+  </div>
+  <div class="field">
+    <%= f.label :professional_profession_id %><br>
+    <%= f.text_field :professional_profession_id %>
+  </div>
+  <div class="field">
+    <%= f.label :professional_profession_service_id %><br>
+    <%= f.text_field :professional_profession_service_id %>
+  </div>
+  <div class="field">
+    <%= f.label :feedback_type_id %><br>
+    <%= f.number_field :feedback_type_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

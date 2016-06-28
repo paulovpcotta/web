@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity_stars: 
+  source_feedback_id: 
+  user_id: 
+  user_opnion: 
+  active: false
+
+two:
+  quantity_stars: 
+  source_feedback_id: 
+  user_id: 
+  user_opnion: 
+  active: false

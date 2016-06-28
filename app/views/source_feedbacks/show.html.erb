@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Professional:</strong>
+  <%= @source_feedback.professional_id %>
+</p>
+
+<p>
+  <strong>Professional profession:</strong>
+  <%= @source_feedback.professional_profession_id %>
+</p>
+
+<p>
+  <strong>Professional profession service:</strong>
+  <%= @source_feedback.professional_profession_service_id %>
+</p>
+
+<p>
+  <strong>Feedback type:</strong>
+  <%= @source_feedback.feedback_type_id %>
+</p>
+
+<%= link_to 'Edit', edit_source_feedback_path(@source_feedback) %> |
+<%= link_to 'Back', source_feedbacks_path %>

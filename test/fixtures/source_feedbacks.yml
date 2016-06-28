@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  professional_id: 
+  professional_profession_id: 
+  professional_profession_service_id: 
+  feedback_type_id: 1
+
+two:
+  professional_id: 
+  professional_profession_id: 
+  professional_profession_service_id: 
+  feedback_type_id: 1

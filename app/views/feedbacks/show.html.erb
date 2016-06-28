@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantity stars:</strong>
+  <%= @feedback.quantity_stars %>
+</p>
+
+<p>
+  <strong>Source feedback:</strong>
+  <%= @feedback.source_feedback_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @feedback.user_id %>
+</p>
+
+<p>
+  <strong>User opnion:</strong>
+  <%= @feedback.user_opnion %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @feedback.active %>
+</p>
+
+<%= link_to 'Edit', edit_feedback_path(@feedback) %> |
+<%= link_to 'Back', feedbacks_path %>
