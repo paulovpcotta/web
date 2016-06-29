@@ -5,6 +5,7 @@
       <%= f.hidden_field :active %>
       <%= f.fields_for :professional_professions do |prof| %>
           <%= prof.collection_select  :profession_id, Profession.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
+          <%= prof.text_area :description, control_col: "col-md-6", label_col: "col-md-4", rows: 10 %>
       <% end %>
 
 
@@ -16,6 +17,9 @@
       <div class="content-subheading"> <i class="icon-megaphone-1 fa"></i> <strong><%=t '.comprehensiveness'%></strong> </div>
       <%= f.fields_for :professional_city_coverages do |city| %>
           <%= city.collection_select  :city_id, City.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
+      <% end %>
+      <%= f.fields_for :professional_district_coverages do |district| %>
+          <%= district.collection_select :district_id, District.all, :id, :name , {control_col: "col-md-6", label_col: "col-md-4"}, {:multiple=>true}%>
       <% end %>
       <script>
         $("#professional_professional_city_coverages_attributes_0_city_id").change(function () {

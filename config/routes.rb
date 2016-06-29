@@ -22,8 +22,6 @@ Rails.application.routes.draw do
   get 'professional/professional_services/:id/edit' =>  'professionals#edit_professional_services', as: 'professionals_edit_professional_services'
   delete 'professional/professional_services/:id/delete' =>  'professionals#delete_professional_services', as: 'professionals_delete_professional_services'
 
-  city_coverage_search
-
   resources :professions
 
   devise_scope :user do

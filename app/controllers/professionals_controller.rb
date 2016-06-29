@@ -24,6 +24,7 @@ class ProfessionalsController < ApplicationController
     @professional.phone = Phone.new
     @professional.professional_professions.build
     @professional.professional_city_coverages.build
+    @professional.professional_district_coverages.build
     @professional_service = ProfessionalProfessionService.new
     @services = {}
     @city_list = {}
