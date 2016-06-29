@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: "users/sessions",confirmations: "users/confirmations", registrations: "users/registrations", passwords: "users/passwords"}
   get 'cep/search/:id' =>  'cep#search', as: 'cep_search'
   get 'professionals/cep/:id' =>  'professionals#search', as: 'professionals_search'
+  get 'professionals/city_coverage/:id' =>  'professionals#city_coverage_search', as: 'professionals_city_coverage_search'
   get 'professionals/service/update_services' =>  'professionals#update_services', as: 'update_services'
   get 'professionals/service/update_city_list' =>  'professionals#update_city_list', as: 'update_city_list'
 
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
   post 'professional/professional_services/create' =>  'professionals#create_professional_services', as: 'professionals_create_professional_services'
   get 'professional/professional_services/:id/edit' =>  'professionals#edit_professional_services', as: 'professionals_edit_professional_services'
   delete 'professional/professional_services/:id/delete' =>  'professionals#delete_professional_services', as: 'professionals_delete_professional_services'
+
+  city_coverage_search
 
   resources :professions
 

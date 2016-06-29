@@ -23,6 +23,7 @@ class ProfessionalsController < ApplicationController
     #@professional.address.city = City.new
     @professional.phone = Phone.new
     @professional.professional_professions.build
+    @professional.professional_city_coverages.build
     @professional_service = ProfessionalProfessionService.new
     @services = {}
     @city_list = {}
@@ -130,6 +131,13 @@ class ProfessionalsController < ApplicationController
       end
       render :new
     end
+  end
+
+  def city_coverage_search
+     @district_coverage_list = District.where(city_id: params[:id])
+      respond_to do |format|
+        format.js
+      end
   end
 
   def search

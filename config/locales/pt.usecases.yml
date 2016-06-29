@@ -123,6 +123,8 @@ pt:
       helpDescription: Inclua aqui o maior numero de detalhes do serviço a ser executado
       realphotos: Adicione até 5 fotos. Inclua fotos reais do seu trabalho.
       first_page_submit: Avançar
+      location: 'Localização'
+      comprehensiveness: 'Abrangência'
     new_part2:
       new_service: Novo Serviço
       title: Cadastre aqui seus serviços
@@ -193,3 +195,7 @@ pt:
         state_id: Estado
         city_ids: Cidade
         district_ids: Bairro
+      professional_city_coverage:
+        city_id: Cidade
+      professional_profession:
+        profession_id: Profissão

@@ -12,12 +12,14 @@ class Professional < ActiveRecord::Base
 
   # has_and_belongs_to_many :services
   # has_and_belongs_to_many :districts
-  # has_and_belongs_to_many :cities
+  has_and_belongs_to_many :cities
   has_and_belongs_to_many :professions
 
   accepts_nested_attributes_for :address, allow_destroy: true
   accepts_nested_attributes_for :phone, allow_destroy: true
   accepts_nested_attributes_for :professional_professions, allow_destroy: true
+  accepts_nested_attributes_for :professional_district_coverages, allow_destroy: true
+  accepts_nested_attributes_for :professional_city_coverages, allow_destroy: true
 
   validates_presence_of :active,:user_id, :address, :phone
 

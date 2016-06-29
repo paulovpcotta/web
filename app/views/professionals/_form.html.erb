@@ -3,13 +3,28 @@
 
       <%= f.hidden_field :user_id %>
       <%= f.hidden_field :active %>
+      <%= f.fields_for :professional_professions do |prof| %>
+          <%= prof.collection_select  :profession_id, Profession.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
+      <% end %>
+
+
+      <div class="content-subheading"> <i class="icon-address fa"></i> <strong><%=t '.location'%></strong> </div>
       <%= render partial: 'address', locals: {city_list:@city_list ,address: @professional.address,f:f} %>
       <%= f.fields_for :phone do |p| %>
           <%= p.text_field :phone, data: {inputmask: "'mask': '(99)9999[9]-9999','removeMaskOnSubmit':'true'"}, control_col: "col-md-6", label_col: "col-md-4", placeholder: t('activerecord.attributes.user.phone_number') %>
       <% end %>
-      <%= f.fields_for :professional_professions do |prof| %>
-          <%= prof.collection_select  :profession_id, Profession.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
+      <div class="content-subheading"> <i class="icon-megaphone-1 fa"></i> <strong><%=t '.comprehensiveness'%></strong> </div>
+      <%= f.fields_for :professional_city_coverages do |city| %>
+          <%= city.collection_select  :city_id, City.all, :id, :name, {include_blank: 'Selecione', control_col: "col-md-6", label_col: "col-md-4"}, {:class=>'form-control'} %>
       <% end %>
+      <script>
+        $("#professional_professional_city_coverages_attributes_0_city_id").change(function () {
+          $.ajax({
+            url: "/professionals/city_coverage/" + $('#professional_professional_city_coverages_attributes_0_city_id').val(),
+            type: "GET"
+          });
+        });
+      </script>
       <div class="form-group">
         <label class="col-md-4 control-label"></label>
         <div class="col-md-6 text-right">

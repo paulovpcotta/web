@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20160622010753) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.binary   "photo_content"
+    t.text     "photo_content"
   end
 
   add_index "professional_profession_images", ["professional_profession_id"], name: "idx_serv_img_on_serv_ad_id", using: :btree
