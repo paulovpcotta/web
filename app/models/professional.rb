@@ -4,6 +4,7 @@ class Professional < ActiveRecord::Base
   belongs_to :user
 
   has_many :professional_district_coverages
+  has_many :districts, :through => :professional_district_coverages
   has_many :professional_city_coverages
   has_many :professional_professions
 
@@ -20,6 +21,7 @@ class Professional < ActiveRecord::Base
   accepts_nested_attributes_for :professional_professions, allow_destroy: true
   accepts_nested_attributes_for :professional_district_coverages, allow_destroy: true
   accepts_nested_attributes_for :professional_city_coverages, allow_destroy: true
+  accepts_nested_attributes_for :districts, allow_destroy: true
 
   validates_presence_of :active,:user_id, :address, :phone
 
