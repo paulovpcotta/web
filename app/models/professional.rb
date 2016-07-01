@@ -4,15 +4,15 @@ class Professional < ActiveRecord::Base
   belongs_to :user
 
   has_many :professional_district_coverages
-  has_many :districts, :through => :professional_district_coverages
   has_many :professional_city_coverages
   has_many :professional_professions
-
+  has_many :districts, through: :professional_district_coverages
+  
   # has_many :service_professional_feedbacks, through: :users
   # has_many :professional_profession_images, through: :professional_professions
 
   # has_and_belongs_to_many :services
-  # has_and_belongs_to_many :districts
+  
   has_and_belongs_to_many :cities
   has_and_belongs_to_many :professions
 

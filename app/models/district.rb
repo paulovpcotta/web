@@ -1,4 +1,4 @@
 class District < ActiveRecord::Base
   belongs_to :city
-  has_and_belongs_to_many :professionals
+  has_many :professionals, through: :professional_district_coverages
 end
