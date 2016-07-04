@@ -1,12 +1,12 @@
 GIT
-  remote: git://github.com/knapo/jquery-inputmask-rails.git
+  remote: https://github.com/knapo/jquery-inputmask-rails
   revision: 38366e494459d6f662a4e1f0d4c9bc916fd1d901
   specs:
     jquery-inputmask-rails (0.3.3)
       railties (>= 3.1, <= 5.0)
 
 GIT
-  remote: git://github.com/prodis/correios-cep.git
+  remote: https://github.com/prodis/correios-cep
   revision: 92f5988075f6a7ab84031358659e1a0cbf743845
   specs:
     correios-cep (0.6.1)
@@ -237,4 +237,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.1
+   1.12.5

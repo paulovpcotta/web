@@ -40,13 +40,13 @@ gem 'nokogiri'
 
 gem 'json'
 
-gem 'jquery-inputmask-rails', github: 'knapo/jquery-inputmask-rails'
+gem 'jquery-inputmask-rails', :git => 'https://github.com/knapo/jquery-inputmask-rails'
 
 gem 'pg'
 
 gem 'devise'
 
-gem 'correios-cep', github: 'prodis/correios-cep'
+gem 'correios-cep', :git => 'https://github.com/prodis/correios-cep'
 
 gem "paperclip", "~> 4.3"
 
