@@ -23,15 +23,10 @@
     <% @professionals.each do |professional| %>
       <tr>
         <td><%= professional.user_id %></td>
-        <td><%= professional.integer %></td>
         <td><%= professional.nothing_on_record %></td>
-        <td><%= professional.integer %></td>
         <td><%= professional.active %></td>
-        <td><%= professional.integer %></td>
         <td><%= professional.phone_id %></td>
-        <td><%= professional.integer %></td>
         <td><%= professional.address_id %></td>
-        <td><%= professional.integer %></td>
         <td><%= link_to 'Show', professional %></td>
         <td><%= link_to 'Edit', edit_professional_path(professional) %></td>
         <td><%= link_to 'Destroy', professional, method: :delete, data: { confirm: 'Are you sure?' } %></td>
