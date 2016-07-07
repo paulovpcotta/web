@@ -58,10 +58,14 @@
             <span class="info-row"> <span class="date"><i class=" icon-clock"> </i> <%= @professional.created_at.to_s %> </span> - <span class="category"><%= list_categories %> </span>- <span class="item-location"><i class="fa fa-map-marker"></i> <%= @professional.address.city.name  %> </span> </span>
             <div class="ads-image">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <h1 class="pricetag"> $25</h1>
 =======
               <h1 class="pricetag"> <%= number_to_currency(@professional.professional_profession_services.first.price, unit: "R$", separator: ",", delimiter: ".")  %></h1>
 >>>>>>> '#2'Adequando o html ao template
+=======
+              <h1 class="pricetag"> $25</h1>
+>>>>>>> b9ea41e4b75d2000336721b4a1c40a71ace5d7ef
               <ul class="bxslider">
                 <li><img src="images/item/tp-big/Image00014.jpg" alt="img" /></li>
                 <li><img src="images/item/tp-big/Image00015.jpg" alt="img" /></li>
