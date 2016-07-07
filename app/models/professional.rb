@@ -7,6 +7,7 @@ class Professional < ActiveRecord::Base
   has_many :professional_city_coverages
   has_many :professional_professions
   has_many :districts, through: :professional_district_coverages
+  has_many :professional_profession_services, through: :professional_professions
   
   # has_many :service_professional_feedbacks, through: :users
   # has_many :professional_profession_images, through: :professional_professions
@@ -14,7 +15,7 @@ class Professional < ActiveRecord::Base
   # has_and_belongs_to_many :services
   
   has_and_belongs_to_many :cities
-  has_and_belongs_to_many :professions
+  has_many :professions, through: :professional_professions
 
   accepts_nested_attributes_for :address, allow_destroy: true
   accepts_nested_attributes_for :phone, allow_destroy: true
