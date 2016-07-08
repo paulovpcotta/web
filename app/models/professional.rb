@@ -2,12 +2,14 @@ class Professional < ActiveRecord::Base
   belongs_to :address
   belongs_to :phone
   belongs_to :user
+  has_one :profile, through: :user
 
   has_many :professional_district_coverages
   has_many :professional_city_coverages
   has_many :professional_professions
   has_many :districts, through: :professional_district_coverages
   has_many :professional_profession_services, through: :professional_professions
+  has_many :professional_profession_images, through: :professional_professions
   
   # has_many :service_professional_feedbacks, through: :users
   # has_many :professional_profession_images, through: :professional_professions

@@ -1,40 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="assets/ico/favicon.png">
-<title>BOOTCLASIFIED - Responsive Classified Theme</title>
-<!-- Bootstrap core CSS -->
-<link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="assets/css/style.css" rel="stylesheet">
-
-<!-- styles needed for carousel slider -->
-<link href="assets/css/owl.carousel.css" rel="stylesheet">
-<link href="assets/css/owl.theme.css" rel="stylesheet">
-
-<!-- bxSlider CSS file -->
-<link href="assets/plugins/bxslider/jquery.bxslider.css" rel="stylesheet" />
-
-<!-- Just for debugging purposes. -->
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->
-
-<!-- include pace script for automatic web page progress bar  -->
-
-<script>
-    paceOptions = {
-      elements: true
-    };
-</script>
-<script src="assets/js/pace.min.js"></script>
-</head>
 <body>
 <div id="wrapper">
     
@@ -55,18 +20,24 @@
             <h2> <%= list_professions.to_s %>
             	<!-- <small class="label label-default adlistingtype">Company ad</small> -->
             </h2>
-            <span class="info-row"> <span class="date"><i class=" icon-clock"> </i> <%= @professional.created_at.to_s %> </span> - <span class="category"><%= list_categories %> </span>- <span class="item-location"><i class="fa fa-map-marker"></i> <%= @professional.address.city.name  %> </span> </span>
+            <span class="info-row"> 
+            	<span class="date"><i class=" icon-clock"> </i> <%= @professional.created_at.to_s %> </span> - 
+            	<span class="category"><%= list_categories %> </span> - 
+            	<span class="item-location"><i class="fa fa-map-marker"></i> <%= @professional.address.city.name  %> </span>
+            </span>
             <div class="ads-image">
               <h1 class="pricetag"> <%= number_to_currency(@professional.professional_profession_services.first.price, unit: "R$", separator: ",", delimiter: ".")  %></h1>
               <ul class="bxslider">
-                <li><img src="images/item/tp-big/Image00014.jpg" alt="img" /></li>
-                <li><img src="images/item/tp-big/Image00015.jpg" alt="img" /></li>
-                <li><img src="images/item/tp-big/Image00013.jpg" alt="img" /></li>
+              	<% @professional.professional_profession_images.each do |image| %>
+              		<li><%= image_tag (image.photo.url(:medium)), class: 'thumbnail no-margin' %> </li>
+              	<% end %>
               </ul>
               <div id="bx-pager">
-                <a class="thumb-item-link" data-slide-index="0" href=""><img src="images/item/tp/Image00014.jpg" alt="img" /></a>
-                <a class="thumb-item-link"  data-slide-index="1" href=""><img src="images/item/tp/Image00015.jpg" alt="img" /></a>
-                <a class="thumb-item-link"  data-slide-index="2" href=""><img src="images/item/tp/Image00013.jpg" alt="img" /></a>
+              	<% contador_indices = 0 %>
+              	<% @professional.professional_profession_images.each do |image| %>
+              		 <a class="thumb-item-link" data-slide-index="<%= contador_indices %>" href=""><%= image_tag (image.photo.url(:thumb)), class: 'thumbnail no-margin' %></a>
+              		 <%contador_indices += 1 %>
+              	<% end %>
               </div>
             </div>
             <!--ads-image-->
@@ -276,37 +247,3 @@
   </div>
 </div>
 
-<!-- /.modal --> 
-
-<!-- Le javascript
-================================================== --> 
-
-<!-- Placed at the end of the document so the pages load faster --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"> </script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- include carousel slider plugin  --> 
-<script src="assets/js/owl.carousel.min.js"></script> 
-
-<!-- include equal height plugin  --> 
-<script src="assets/js/jquery.matchHeight-min.js"></script> 
-
-<!-- include jquery list shorting plugin plugin  --> 
-<script src="assets/js/hideMaxListItem.js"></script> 
-
-<!-- bxSlider Javascript file --> 
-<script src="assets/plugins/bxslider/jquery.bxslider.min.js"></script> 
-<script>
-$('.bxslider').bxSlider({
-  pagerCustom: '#bx-pager'
-});
-
-
-</script> 
-<!-- include form-validation plugin || add this script where you need validation   --> 
-<script src="assets/js/form-validation.js"></script> 
-<!-- include jquery.fs plugin for custom scroller and selecter  --> 
-<script src="assets/plugins/jquery.fs.scroller/jquery.fs.scroller.js"></script>
-<script src="assets/plugins/jquery.fs.selecter/jquery.fs.selecter.js"></script>
-<!-- include custom script for site  --> 
-<script src="assets/js/script.js"></script>

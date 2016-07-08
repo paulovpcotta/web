@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Professional Profession Images</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @professional_profession_images.each do |professional_profession_image| %>
+      <tr>
+        <td><%= link_to 'Show', professional_profession_image %></td>
+        <td><%= link_to 'Edit', edit_professional_profession_image_path(professional_profession_image) %></td>
+        <td><%= link_to 'Destroy', professional_profession_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Professional profession image', new_professional_profession_image_path %>

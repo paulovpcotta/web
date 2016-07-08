@@ -42,6 +42,9 @@
     <link href="/css/owl.theme.css" rel="stylesheet">
 
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    
+    <!-- bxSlider CSS file -->
+	<link href="/plugins/bxslider/jquery.bxslider.css" rel="stylesheet" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -159,5 +162,15 @@
       $(":input").inputmask();
     });
   </script>
+  	<!-- bxSlider Javascript file --> 
+	<script src="/plugins/bxslider/jquery.bxslider.min.js"></script> 
+	<script>
+	$('.bxslider').bxSlider({
+	  pagerCustom: '#bx-pager'
+	});
+	</script>
+	<!-- include form-validation plugin || add this script where you need validation   --> 
+	<script src="/js/form-validation.js"></script> 
+
   </body>
 </html>
