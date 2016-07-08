@@ -199,3 +199,6 @@ pt:
         city_id: Cidade
       professional_profession:
         profession_id: Profissão
+        description: Detalhes do Trabalho
+      professional:
+        district_ids: Bairros

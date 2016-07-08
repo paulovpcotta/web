@@ -29,6 +29,7 @@ class ProfessionalsController < ApplicationController
     @professional_service = ProfessionalProfessionService.new
     @services = {}
     @city_list = {}
+    @district_coverage_list = {}
     session[:professional] = @professional
   end
 
@@ -127,6 +128,10 @@ class ProfessionalsController < ApplicationController
       @services = {}
       render :new_part2
     else
+      @district_coverage_list = {}
+      if(@professional.professional_city_coverages.first.city_id.present?)
+        @district_coverage_list = District.where(city_id: @professional.professional_city_coverages.first.city_id)
+      end
       @city_list = {}
       if (@professional.address.state_id.present?)
         @city_list = City.where(:state_id => @professional.address.state_id)

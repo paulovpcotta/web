@@ -24,7 +24,7 @@ class Professional < ActiveRecord::Base
   accepts_nested_attributes_for :professional_city_coverages, allow_destroy: true
   accepts_nested_attributes_for :districts, allow_destroy: true
 
-  validates_presence_of :active,:user_id, :address, :phone
+  validates_presence_of :active,:user_id, :address, :phone, :professional_city_coverages
 
   scope :active, -> {where ("active = TRUE")}
 end
