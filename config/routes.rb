@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :professional_profession_images
   resources :feedback_types
   resources :source_feedbacks
   resources :feedbacks
