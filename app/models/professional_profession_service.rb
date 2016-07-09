@@ -5,11 +5,11 @@ class ProfessionalProfessionService < ActiveRecord::Base
   belongs_to :professional_profession
 
   has_one :professional, through: :professional_profession
-  has_many :profession, through: :professional_profession
   has_one :user, through: :professional
   has_one :profile, through: :user
   
-  has_many :service_professional_feedback
+  has_many :profession, through: :professional_profession
+  has_many :source_feedbacks, through: :professional_profession
 
   #accepts_nested_attributes_for :service
 

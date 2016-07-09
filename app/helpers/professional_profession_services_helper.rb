@@ -5,8 +5,8 @@ module ProfessionalProfessionServicesHelper
   
   
     def display_star_feedback(level, type_info, professional_profession_service)
-      feedbacks = professional_profession_service.service_professional_feedback
-      average_stars = get_average_stars(feedbacks)
+      source_feedbacks = professional_profession_service.source_feedbacks
+      average_stars = get_average_stars(source_feedbacks)
       if type_info == "star"        
         choose_star_style(level, average_stars)
       else
@@ -138,12 +138,12 @@ module ProfessionalProfessionServicesHelper
         end
    end
    
-   def get_average_stars(feedbacks)
+   def get_average_stars(source_feedbacks)
      sum_stars = 0
-     feedbacks.each do |feedback|
-       sum_stars += feedback.quantity_stars
+     source_feedbacks.each do |source_feedback|
+       sum_stars += source_feedback.feedback.quantity_stars
      end
-     (!feedbacks.empty? and sum_stars > 0) ? (sum_stars.to_f/feedbacks.size).round : 0     
+     (!source_feedbacks.empty? and sum_stars > 0) ? (sum_stars.to_f/source_feedbacks.size).round : 0     
    end
   
 end
