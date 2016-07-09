@@ -7,6 +7,6 @@ class ProfessionalProfessionImage < ActiveRecord::Base
 
 
   validates_attachment :photo, presence: true,
-                       content_type: { content_type: "image/jpeg" },
+                       content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
                        size: { in: 0..10.megabytes }
 end

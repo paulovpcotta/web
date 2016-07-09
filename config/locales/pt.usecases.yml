@@ -131,6 +131,9 @@ pt:
       submit: Salvar
       cancel: Cancelar
       new_service: Cadastro de Serviço
+      saved_message: Profissional cadastrado com sucesso.
+      images_title: Cadastre aqui as imagens do seu trabalho
+      final_button: Finalizar
   activerecord:
     models:
       profession:
@@ -202,3 +205,5 @@ pt:
         description: Detalhes do Trabalho
       professional:
         district_ids: Bairros
+      professional_profession_image:
+        photo: ' '

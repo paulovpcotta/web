@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get 'professional/professional_services/new' =>  'professionals#new_professional_services', as: 'professionals_new_professional_services'
   post 'professional/professional_services/create' =>  'professionals#create_professional_services', as: 'professionals_create_professional_services'
+  post 'professional/professional_profession/create' =>  'professionals#create_professional_profession', as: 'professionals_create_professional_profession'
   get 'professional/professional_services/:id/edit' =>  'professionals#edit_professional_services', as: 'professionals_edit_professional_services'
   delete 'professional/professional_services/:id/delete' =>  'professionals#delete_professional_services', as: 'professionals_delete_professional_services'
 

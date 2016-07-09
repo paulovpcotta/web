@@ -5,6 +5,8 @@ class ProfessionalsController < ApplicationController
 
   before_action :set_professional, only: [:show, :edit, :update, :destroy]
 
+  before_action :set_professional_profession, only: [:create_professional_profession]
+
   # GET /professionals
   def index
     @professionals = Professional.all
@@ -124,6 +126,10 @@ class ProfessionalsController < ApplicationController
       @professional_service.service = Service.new
       @professional_service.active = true
       @professional_service.professional_profession_id = @professional.professional_professions.first.id
+      @professional_profession = @professional.professional_professions.first
+      5.times {
+        @professional_profession.professional_profession_images.build
+      }
       @professional_service_list = {}
       @services = {}
       render :new_part2
@@ -174,6 +180,13 @@ class ProfessionalsController < ApplicationController
       render :edit
     end
   end
+  def create_professional_profession
+    if @professional_profession.update(professional_profession_params)
+      redirect_to "/message/index", notice: t('professionals.new_part2.saved_message')
+    else
+      render :new_part2
+    end
+  end
 
   # DELETE /professionals/1
   def destroy
@@ -187,6 +200,10 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.find(params[:id])
   end
 
+  def set_professional_profession
+    @professional_profession = ProfessionalProfession.find(params['professional_profession']['id'])
+  end
+
   # Only allow a trusted parameter "white list" through.
   def professional_params
     params.require(:professional).permit!
@@ -195,6 +212,11 @@ class ProfessionalsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def professional_service_params
     params.require(:professional_profession_service).permit!
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def professional_profession_params
+    params.require(:professional_profession).permit!
   end
 
 end

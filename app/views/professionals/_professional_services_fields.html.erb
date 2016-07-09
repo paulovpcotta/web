@@ -1,5 +1,4 @@
-<div class="panel-content">
-  <div class="panel-body">
+
     <% if not @professional_service_list.empty? %>
 <table class="table">
   <thead>
@@ -32,11 +31,8 @@
   </tbody>
 </table>
     <%end%>
-    <div class="form-group">
-      <label class="col-md-4 control-label"></label>
-      <div class="col-md-8 text-right">
+    <div class="form-group" style="margin-bottom:0">
+      <div class="text-right">
         <%= link_to t('professionals.new_part2.new_service'), professionals_new_professional_services_path(:professional_profession_id => @professional_service.professional_profession_id), remote: true, class: "btn btn-primary" %>
       </div>
     </div>
-  </div>
-</div>
