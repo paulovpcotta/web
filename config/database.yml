@@ -7,8 +7,8 @@
 development:
   adapter: postgresql
   database: kabrabom
-  username: emival
-  password: 123
+  username: postgres
+  password: postgres
   pool: 5
   timeout: 5000
 test:

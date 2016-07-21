@@ -37,5 +37,26 @@ ServiceUnit.create([{name:'Metro quadrado'},
                     {name:'Diária'}])
 categories = Category.create([{name:'Automoveis e Cia',description:'Automoveis e Cia',active:true,icon:'car'},
                  {name:'Residencial',description:'Residencial',active:true,icon:'home'},])
+Profession.create([{name:'Pedreiro',description: 'Pedreiro',active: true,category: categories.second},
+                   {name:'Pintor',description:'Pintor',active: true,category: categories.first}])
 Service.create({name:'Funilaria',description:'Automoveis e Cia',category:categories.first})
-City.create({name:'Brasília',active:true,state:State.find(7)})
+cities = City.create([{name:'Brasília',active:true,state:State.find(7)},{name:'Goiânia',active:true,state:State.find(9)}])
+District.create([{name: 'Guará I',active:true, city: cities.first},
+                {name: 'Guará II',active:true, city: cities.first},
+                {name: 'Nucleo Bandeirante',active:true, city: cities.first},
+                {name: 'Taguatinga',active:true, city: cities.first},
+                {name: 'Sobradinho',active:true, city: cities.first},
+                {name: 'Ceilândia',active:true, city: cities.first},
+                {name: 'Riacho Fundo',active:true, city: cities.first},
+                {name: 'Gama',active:true, city: cities.first},
+                {name: 'Samambaia',active:true, city: cities.first} ,
+                {name: 'Recanto das Emas',active:true, city: cities.first},
+                 {name: 'Asa Sul',active:true, city: cities.first},
+                 {name: 'Asa Norte',active:true, city: cities.first},
+                 {name: 'Lago Sul',active:true, city: cities.first},
+                 {name: 'Lago Norte',active:true, city: cities.first},
+                 {name: 'São Sebastião',active:true, city: cities.first},
+                 {name: 'Valparaizo',active:true, city: cities.first},
+                 {name: 'Park Way',active:true, city: cities.first},
+                 {name: 'Aguas claras',active:true, city: cities.first}
+                ])

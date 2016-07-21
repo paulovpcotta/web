@@ -7,4 +7,5 @@ class ProfessionalProfession < ActiveRecord::Base
 	accepts_nested_attributes_for :professional_profession_images, allow_destroy: true
 
 
+
 end

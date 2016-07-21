@@ -143,6 +143,26 @@ ActiveRecord::Schema.define(version: 20160707025053) do
     t.string   "description"
   end
 
+  create_table "professional_services", force: :cascade do |t|
+    t.boolean  "active"
+    t.decimal  "price"
+    t.integer  "service_id"
+    t.integer  "service_unit_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.datetime "excluded_at"
+    t.integer  "professional_id"
+  end
+
+  add_index "professional_services", ["active", "service_id", "professional_id"], name: "idx_active_service_professional", using: :btree
+  add_index "professional_services", ["active", "service_id"], name: "idx_active_service", using: :btree
+  add_index "professional_services", ["active"], name: "index_professional_services_on_active", using: :btree
+  add_index "professional_services", ["created_at"], name: "index_professional_services_on_created_at", using: :btree
+  add_index "professional_services", ["excluded_at"], name: "index_professional_services_on_excluded_at", using: :btree
+  add_index "professional_services", ["service_id", "professional_id"], name: "idx_service_professional", using: :btree
+  add_index "professional_services", ["service_id"], name: "index_professional_services_on_service_id", using: :btree
+  add_index "professional_services", ["service_unit_id"], name: "index_professional_services_on_service_unit_id", using: :btree
+
   create_table "professionals", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "nothing_on_record"
@@ -256,6 +276,9 @@ ActiveRecord::Schema.define(version: 20160707025053) do
   add_foreign_key "professional_profession_services", "services"
   add_foreign_key "professional_professions", "professionals"
   add_foreign_key "professional_professions", "professions"
+  add_foreign_key "professional_services", "professionals"
+  add_foreign_key "professional_services", "service_units"
+  add_foreign_key "professional_services", "services"
   add_foreign_key "professionals", "addresses"
   add_foreign_key "professionals", "phones"
   add_foreign_key "professionals", "users"
